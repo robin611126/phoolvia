@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
 import { Heart, Star, Minus, Plus, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Product {
     id: string; name: string; slug: string; description: string; price: number; compare_price: number | null;
@@ -64,7 +65,7 @@ export default function ProductDetailPage() {
         }
         localStorage.setItem('phoolviaa_cart', JSON.stringify(cart));
         window.dispatchEvent(new Event('cart-updated'));
-        alert('Added to cart!');
+        toast.success(`Added ${product.name} to cart`);
     }
 
     if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blush-400" /></div>;

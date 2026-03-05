@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { insforge } from '../../lib/insforge';
 import { GripVertical, Eye, EyeOff, Edit2, Plus } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Section {
     id: string;
@@ -64,7 +65,7 @@ export default function HomepageEditorPage() {
             if (error) throw error;
             if (data) setEditImageUrl(data.url);
         } catch (err: any) {
-            alert('Upload failed: ' + err.message);
+            toast.error('Upload failed: ' + err.message);
         } finally {
             setUploadingImage(false);
         }
@@ -89,6 +90,7 @@ export default function HomepageEditorPage() {
             image_url: editImageUrl,
             content: updatedContent
         } : s));
+        toast.success('Section updated successfully');
         setEditSection(null);
     }
 

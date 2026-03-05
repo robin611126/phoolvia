@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { insforge } from '../../lib/insforge';
 import { Upload, Search, Image, Trash2, Copy, X } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Media {
     id: string;
@@ -33,6 +34,7 @@ export default function MediaLibraryPage() {
         const files = e.target.files;
         if (!files) return;
         setUploading(true);
+        let count = 0;
         for (const file of Array.from(files)) {
             const { data, error } = await insforge.storage.from('media-library').uploadAuto(file);
             if (data && !error) {
@@ -46,23 +48,30 @@ export default function MediaLibraryPage() {
                     category: file.type.startsWith('image/') ? 'images' : 'other',
                 };
                 await insforge.database.from('media').insert(mediaRecord);
+                count++;
             }
         }
         setUploading(false);
+        if (count > 0) toast.success(`Uploaded ${count} file${count > 1 ? 's' : ''}`);
         loadMedia();
     }
 
     async function deleteMedia(item: Media) {
         if (!confirm('Delete this file?')) return;
-        await insforge.storage.from('media-library').remove(item.key);
-        await insforge.database.from('media').delete().eq('id', item.id);
-        setMedia(media.filter(m => m.id !== item.id));
-        if (selected?.id === item.id) setSelected(null);
+        try {
+            await insforge.storage.from('media-library').remove(item.key);
+            await insforge.database.from('media').delete().eq('id', item.id);
+            setMedia(media.filter(m => m.id !== item.id));
+            if (selected?.id === item.id) setSelected(null);
+            toast.success('File deleted');
+        } catch (err: any) {
+            toast.error(err.message || 'Error deleting file');
+        }
     }
 
     function copyUrl(url: string) {
         navigator.clipboard.writeText(url);
-        alert('URL copied!');
+        toast.success('URL copied to clipboard!');
     }
 
     const filtered = media.filter(m => {

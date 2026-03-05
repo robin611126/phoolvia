@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { insforge } from '../../lib/insforge';
 import { Plus, Edit2, Trash2, FolderOpen, X } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Category {
     id: string;
@@ -53,7 +54,7 @@ export default function CategoriesPage() {
             if (uploadError) throw uploadError;
             if (data) setForm({ ...form, image_url: data.url });
         } catch (err: any) {
-            alert('Upload failed: ' + err.message);
+            toast.error('Upload failed: ' + err.message);
         } finally {
             setUploadingImage(false);
         }
@@ -62,19 +63,30 @@ export default function CategoriesPage() {
     async function handleSave(e: React.FormEvent) {
         e.preventDefault();
         const payload = { name: form.name, slug: slugify(form.name), description: form.description || null, image_url: form.image_url || null };
-        if (editing) {
-            await insforge.database.from('categories').update(payload).eq('id', editing.id);
-        } else {
-            await insforge.database.from('categories').insert({ ...payload, sort_order: categories.length + 1 });
+        try {
+            if (editing) {
+                await insforge.database.from('categories').update(payload).eq('id', editing.id);
+                toast.success('Category updated successfully');
+            } else {
+                await insforge.database.from('categories').insert({ ...payload, sort_order: categories.length + 1 });
+                toast.success('Category created successfully');
+            }
+            setShowModal(false);
+            loadCategories();
+        } catch (err: any) {
+            toast.error(err.message || 'Error saving category');
         }
-        setShowModal(false);
-        loadCategories();
     }
 
     async function deleteCategory(id: string) {
         if (!confirm('Delete this category?')) return;
-        await insforge.database.from('categories').delete().eq('id', id);
-        setCategories(categories.filter(c => c.id !== id));
+        try {
+            await insforge.database.from('categories').delete().eq('id', id);
+            setCategories(categories.filter(c => c.id !== id));
+            toast.success('Category deleted');
+        } catch (err: any) {
+            toast.error(err.message || 'Error deleting category');
+        }
     }
 
     if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-admin-primary" /></div>;

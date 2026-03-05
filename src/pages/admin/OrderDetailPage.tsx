@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
 import { createShiprocketOrder, getCourierServices, assignCourier, requestPickup, trackOrder } from '../../lib/shiprocket';
 import { ArrowLeft, Printer, MapPin, Package, Truck, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function OrderDetailPage() {
     const { id } = useParams();
@@ -42,7 +43,7 @@ export default function OrderDetailPage() {
         setSaving(true);
         await insforge.database.from('orders').update({ order_status: status, admin_notes: notes, updated_at: new Date().toISOString() }).eq('id', id);
         setSaving(false);
-        alert('Order updated!');
+        toast.success('Order updated successfully!');
     }
 
     // --- Shiprocket Functions ---
@@ -85,7 +86,7 @@ export default function OrderDetailPage() {
                 }
             }
         } catch (err: any) {
-            alert('Shiprocket error: ' + (err.message || 'Unknown error'));
+            toast.error('Shiprocket error: ' + (err.message || 'Unknown error'));
         }
         setShipping(false);
     }
@@ -108,13 +109,13 @@ export default function OrderDetailPage() {
 
                 // Request pickup
                 await requestPickup(order.shiprocket_shipment_id);
-                alert(`Courier assigned! AWB: ${result.response.data.awb_code}`);
+                toast.success(`Courier assigned! AWB: ${result.response.data.awb_code}`);
                 setCouriers([]);
             } else {
-                alert('Could not assign courier. ' + JSON.stringify(result));
+                toast.error('Could not assign courier. ' + JSON.stringify(result));
             }
         } catch (err: any) {
-            alert('Error: ' + err.message);
+            toast.error('Error: ' + err.message);
         }
         setAssigning(false);
     }

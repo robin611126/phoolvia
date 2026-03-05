@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
 import { ShieldCheck, Package, Lock, ChevronDown, ChevronUp } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface CartItem { id: string; name: string; price: number; image: string | null; quantity: number; variant: string; }
 
@@ -49,7 +50,7 @@ export default function CheckoutPage() {
         // Call our secure Edge Function to generate Razorpay Order ID
         const isScriptLoaded = await loadRazorpayScript();
         if (!isScriptLoaded) {
-            alert('Razorpay SDK failed to load. Are you offline?');
+            toast.error('Razorpay SDK failed to load. Are you offline?');
             setLoading(false);
             return;
         }
@@ -61,7 +62,7 @@ export default function CheckoutPage() {
 
             if (error || !data || !data.orderId) {
                 console.error('Razorpay Gen Error:', error || data);
-                alert('Payment matching failed. Please try again.');
+                toast.error('Payment matching failed. Please try again.');
                 setLoading(false);
                 return;
             }
@@ -112,8 +113,17 @@ export default function CheckoutPage() {
 
         const { error } = await insforge.database.from('orders').insert(orderData);
 
-        // Update/create customer
+        // Update/create customer and deduct inventory
         if (!error) {
+            // Deduct Inventory
+            for (const item of orderData.items) {
+                const { data: currentProduct } = await insforge.database.from('products').select('inventory_qty').eq('id', item.product_id).single();
+                if (currentProduct && currentProduct.inventory_qty !== undefined) {
+                    const newQty = Math.max(0, currentProduct.inventory_qty - item.quantity);
+                    await insforge.database.from('products').update({ inventory_qty: newQty }).eq('id', item.product_id);
+                }
+            }
+
             const { data: existingCustomer } = await insforge.database.from('customers').select('*').eq('email', form.email).maybeSingle();
             if (existingCustomer) {
                 await insforge.database.from('customers').update({ total_orders: (existingCustomer.total_orders || 0) + 1, total_spent: parseFloat(existingCustomer.total_spent || 0) + total, phone: form.phone, address: { street: form.street, city: form.city, state: form.state, pin: form.pin } }).eq('id', existingCustomer.id);

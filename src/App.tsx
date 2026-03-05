@@ -46,11 +46,24 @@ import TermsPage from './pages/store/legal/TermsPage';
 import PrivacyPage from './pages/store/legal/PrivacyPage';
 import ShippingPolicyPage from './pages/store/legal/ShippingPolicyPage';
 import RefundPolicyPage from './pages/store/legal/RefundPolicyPage';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: '#333',
+            color: '#fff',
+            zIndex: 99999,
+          },
+          duration: 3000
+        }}
+        containerStyle={{ zIndex: 99999 }}
+      />
       <AuthProvider>
         <Routes>
           {/* Admin Login (public) */}
