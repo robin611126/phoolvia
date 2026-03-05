@@ -28,6 +28,8 @@ export default function HomepageEditorPage() {
     const [editSection, setEditSection] = useState<Section | null>(null);
     const [editTitle, setEditTitle] = useState('');
     const [editSubtitle, setEditSubtitle] = useState('');
+    const [editImageUrl, setEditImageUrl] = useState('');
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     useEffect(() => { loadSections(); }, []);
 
@@ -46,12 +48,30 @@ export default function HomepageEditorPage() {
         setEditSection(section);
         setEditTitle(section.title || '');
         setEditSubtitle(section.subtitle || '');
+        setEditImageUrl(section.image_url || '');
+    }
+
+    async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        setUploadingImage(true);
+        try {
+            const ext = file.name.substring(file.name.lastIndexOf('.'));
+            const filename = `homepage/${Date.now()}${ext}`;
+            const { data, error } = await insforge.storage.from('media-library').upload(filename, file);
+            if (error) throw error;
+            if (data) setEditImageUrl(data.url);
+        } catch (err: any) {
+            alert('Upload failed: ' + err.message);
+        } finally {
+            setUploadingImage(false);
+        }
     }
 
     async function saveEdit() {
         if (!editSection) return;
-        await insforge.database.from('homepage_sections').update({ title: editTitle, subtitle: editSubtitle }).eq('id', editSection.id);
-        setSections(sections.map(s => s.id === editSection.id ? { ...s, title: editTitle, subtitle: editSubtitle } : s));
+        await insforge.database.from('homepage_sections').update({ title: editTitle, subtitle: editSubtitle, image_url: editImageUrl }).eq('id', editSection.id);
+        setSections(sections.map(s => s.id === editSection.id ? { ...s, title: editTitle, subtitle: editSubtitle, image_url: editImageUrl } : s));
         setEditSection(null);
     }
 
@@ -101,7 +121,24 @@ export default function HomepageEditorPage() {
                             <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
                                 <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} placeholder="Section Title" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" />
                                 <input type="text" value={editSubtitle} onChange={(e) => setEditSubtitle(e.target.value)} placeholder="Subtitle" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" />
-                                <div className="flex gap-2">
+
+                                <div className="space-y-2">
+                                    <label className="text-xs font-medium text-gray-700">Section Image (Hero Banner / Promo)</label>
+                                    <div className="flex items-center gap-3">
+                                        {editImageUrl && (
+                                            <img src={editImageUrl} alt="Section" className="w-16 h-16 rounded-lg object-cover border border-gray-200" />
+                                        )}
+                                        <label className="text-xs px-3 py-1.5 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors">
+                                            {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                                            <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} className="hidden" />
+                                        </label>
+                                        {editImageUrl && (
+                                            <button onClick={() => setEditImageUrl('')} className="text-xs text-red-500 hover:underline">Remove</button>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-2 pt-2">
                                     <button onClick={saveEdit} className="btn-admin text-xs py-1.5">Save</button>
                                     <button onClick={() => setEditSection(null)} className="text-xs text-gray-500 hover:text-gray-700 px-3 py-1.5">Cancel</button>
                                 </div>

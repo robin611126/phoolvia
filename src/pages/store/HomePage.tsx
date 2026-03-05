@@ -37,24 +37,37 @@ export default function HomePage() {
         <div className="animate-fade-in">
             {/* Hero Banner */}
             {heroSection && (
-                <section className="relative bg-gradient-to-br from-blush-100 via-blush-50 to-ivory mx-4 mt-4 rounded-3xl overflow-hidden">
-                    <div className="p-8 pb-12">
-                        <span className="inline-block px-3 py-1 bg-white/70 backdrop-blur-sm rounded-full text-xs font-semibold text-blush-500 tracking-wider mb-3">
+                <section className={`relative bg-gradient-to-br from-blush-100 via-blush-50 to-ivory mx-4 mt-4 rounded-3xl overflow-hidden ${heroSection.image_url ? 'flex flex-col md:flex-row items-center' : ''}`}>
+                    <div className={`p-8 pb-12 ${heroSection.image_url ? 'flex-1 z-10' : ''}`}>
+                        <span className="inline-block px-3 py-1 bg-white/70 backdrop-blur-sm rounded-full text-xs font-semibold text-blush-500 tracking-wider mb-3 shadow-sm">
                             {heroSection.subtitle}
                         </span>
-                        <h2 className="text-3xl font-display font-bold text-charcoal leading-tight mb-2">
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-charcoal leading-tight mb-2">
                             {heroSection.title}
                         </h2>
-                        <p className="text-sm text-gray-600 mb-6 max-w-xs">
+                        <p className="text-sm md:text-base text-gray-600 mb-6 max-w-sm">
                             Beautiful handcrafted crochet gifts made with love and premium yarn
                         </p>
-                        <Link to="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+                        <Link to="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-md">
                             Shop Now <ChevronRight size={16} />
                         </Link>
                     </div>
+
+                    {/* Hero Image if available */}
+                    {heroSection.image_url && (
+                        <div className="w-full md:w-1/2 h-64 md:h-auto relative">
+                            <img src={heroSection.image_url} alt="Hero" className="w-full h-full object-cover object-center md:absolute md:inset-0" />
+                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-blush-100/80 md:from-blush-100/50 to-transparent pointer-events-none" />
+                        </div>
+                    )}
+
                     {/* Decorative circles */}
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blush-200/50 rounded-full" />
-                    <div className="absolute -top-5 -right-5 w-20 h-20 bg-blush-200/30 rounded-full" />
+                    {!heroSection.image_url && (
+                        <>
+                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blush-200/50 rounded-full" />
+                            <div className="absolute -top-5 -right-5 w-20 h-20 bg-blush-200/30 rounded-full" />
+                        </>
+                    )}
                 </section>
             )}
 
