@@ -12,6 +12,7 @@ export default function HomePage() {
     const [bestSellers, setBestSellers] = useState<Product[]>([]);
     const [sections, setSections] = useState<Section[]>([]);
     const [loading, setLoading] = useState(true);
+    const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
     useEffect(() => { loadData(); }, []);
 
@@ -28,45 +29,81 @@ export default function HomePage() {
     }
 
     const getImg = (p: Product) => p.images?.[0]?.url || p.images?.[0] || null;
-    const heroSection = sections.find(s => s.section_type === 'hero_banner');
+
+    // Group all hero banners together for the slider
+    const heroBanners = sections.filter(s => s.section_type === 'hero_banner');
+
+    // Auto-slide effect
+    useEffect(() => {
+        if (heroBanners.length <= 1) return;
+        const interval = setInterval(() => {
+            setCurrentHeroIndex((prev) => (prev + 1) % heroBanners.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [heroBanners.length]);
+
+    const activeHero = heroBanners[currentHeroIndex];
     const eidSection = sections.find(s => s.section_type === 'eid_special');
 
     if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blush-400" /></div>;
 
     return (
         <div className="animate-fade-in">
-            {/* Hero Banner */}
-            {heroSection && (
-                <section className={`relative bg-gradient-to-br from-blush-100 via-blush-50 to-ivory mx-4 mt-4 rounded-3xl overflow-hidden ${heroSection.image_url ? 'flex flex-col md:flex-row items-center' : ''}`}>
-                    <div className={`p-8 pb-12 ${heroSection.image_url ? 'flex-1 z-10' : ''}`}>
-                        <span className="inline-block px-3 py-1 bg-white/70 backdrop-blur-sm rounded-full text-xs font-semibold text-blush-500 tracking-wider mb-3 shadow-sm">
-                            {heroSection.subtitle}
-                        </span>
-                        <h2 className="text-3xl md:text-4xl font-display font-bold text-charcoal leading-tight mb-2">
-                            {heroSection.title}
-                        </h2>
-                        <p className="text-sm md:text-base text-gray-600 mb-6 max-w-sm">
-                            Beautiful handcrafted crochet gifts made with love and premium yarn
-                        </p>
-                        <Link to="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-md">
-                            Shop Now <ChevronRight size={16} />
-                        </Link>
+            {/* Hero Slider */}
+            {heroBanners.length > 0 && (
+                <section className="relative mx-4 mt-6 rounded-[2rem] overflow-hidden min-h-[500px] md:min-h-[600px] shadow-2xl">
+                    {/* Background Images with premium Ken Burns effect */}
+                    {heroBanners.map((banner, index) => (
+                        <div
+                            key={banner.id}
+                            className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${index === currentHeroIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105 z-[-1]'}`}
+                        >
+                            {banner.image_url ? (
+                                <img src={banner.image_url} alt={banner.title} className="w-full h-full object-cover object-center" />
+                            ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-blush-100 via-blush-50 to-ivory">
+                                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blush-200/50 rounded-full" />
+                                    <div className="absolute -top-5 -right-5 w-20 h-20 bg-blush-200/30 rounded-full" />
+                                </div>
+                            )}
+                            {/* Layered Overlay Gradients for deep, cinematic readability - Black fade from bottom */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
+                        </div>
+                    ))}
+
+                    {/* Premium Text Content - Positioned Bottom Left */}
+                    <div className="relative z-10 p-8 md:p-14 pb-20 h-full flex flex-col justify-end min-h-[500px] md:min-h-[600px]">
+                        {activeHero && (
+                            <div className="animate-fade-in w-full max-w-2xl" key={activeHero.id}>
+                                <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full text-[11px] font-bold text-ivory tracking-[0.2em] uppercase mb-6 shadow-xl hover:bg-white/20 transition-colors cursor-default">
+                                    {activeHero.subtitle || 'NEW COLLECTION'}
+                                </span>
+                                <h2 className="text-5xl md:text-7xl font-display font-medium text-white leading-[1.1] mb-5 tracking-tight drop-shadow-xl">
+                                    {activeHero.title}
+                                </h2>
+                                <p className="text-base md:text-lg text-white/80 mb-10 leading-relaxed font-light max-w-lg tracking-wide drop-shadow-md">
+                                    Beautiful handcrafted crochet gifts made with love and premium yarn
+                                </p>
+                                <Link to="/shop" className="inline-flex items-center gap-3 bg-white text-charcoal px-8 py-4 rounded-full text-base font-bold hover:scale-105 hover:bg-ivory hover:shadow-2xl hover:shadow-white/20 transition-all duration-300">
+                                    Discover Now <ChevronRight size={20} className="text-charcoal/70" />
+                                </Link>
+                            </div>
+                        )}
                     </div>
 
-                    {/* Hero Image if available */}
-                    {heroSection.image_url && (
-                        <div className="w-full md:w-1/2 h-64 md:h-auto relative">
-                            <img src={heroSection.image_url} alt="Hero" className="w-full h-full object-cover object-center md:absolute md:inset-0" />
-                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-blush-100/80 md:from-blush-100/50 to-transparent pointer-events-none" />
+                    {/* Elegant Slider Dots */}
+                    {heroBanners.length > 1 && (
+                        <div className="absolute bottom-8 left-8 md:left-14 flex justify-start gap-2.5 z-10">
+                            {heroBanners.map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => setCurrentHeroIndex(idx)}
+                                    className={`h-1.5 rounded-full transition-all duration-500 ease-out ${idx === currentHeroIndex ? 'bg-white w-10 shadow-[0_0_10px_rgba(255,255,255,0.8)]' : 'bg-white/30 hover:bg-white/60 w-3 cursor-pointer'}`}
+                                    aria-label={`Go to slide ${idx + 1}`}
+                                />
+                            ))}
                         </div>
-                    )}
-
-                    {/* Decorative circles */}
-                    {!heroSection.image_url && (
-                        <>
-                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blush-200/50 rounded-full" />
-                            <div className="absolute -top-5 -right-5 w-20 h-20 bg-blush-200/30 rounded-full" />
-                        </>
                     )}
                 </section>
             )}
@@ -98,24 +135,43 @@ export default function HomePage() {
             {/* Eid Special */}
             {eidSection && (
                 <section className="mt-8 mx-4">
-                    <div className="bg-gradient-to-r from-amber-50 to-blush-50 rounded-3xl p-6 relative overflow-hidden">
-                        <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-[10px] font-bold tracking-wider mb-3">
-                            {eidSection.subtitle}
-                        </span>
-                        <h3 className="text-xl font-display font-bold text-charcoal mb-1">{eidSection.title}</h3>
-                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{eidSection.content?.description}</p>
-                        {eidSection.content?.price && (
-                            <div className="flex items-center gap-2 mb-4">
-                                <span className="text-2xl font-bold text-charcoal">₹{Number(eidSection.content.price).toLocaleString('en-IN')}</span>
-                                {eidSection.content.compare_price && (
-                                    <span className="text-sm text-gray-400 line-through">₹{Number(eidSection.content.compare_price).toLocaleString('en-IN')}</span>
-                                )}
+                    <div className="bg-[#FDFBF7] rounded-[1.5rem] relative flex flex-col items-center border border-[#F2E0D4] shadow-sm max-w-[420px] mx-auto overflow-hidden">
+
+                        {/* Image Content - Moved to Top */}
+                        {eidSection.image_url && (
+                            <div className="w-full h-[280px] relative">
+                                <img src={eidSection.image_url} alt={eidSection.title} className="absolute inset-0 w-full h-full object-cover object-top" />
                             </div>
                         )}
-                        <Link to="/shop" className="inline-flex items-center gap-2 bg-charcoal text-white px-5 py-2.5 rounded-full text-sm font-medium">
-                            {eidSection.content?.cta_text || 'Shop Now'} <ChevronRight size={14} />
-                        </Link>
-                        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-100/40 rounded-full" />
+
+                        {/* Decorative elements if no image */}
+                        {!eidSection.image_url && (
+                            <div className="w-full h-[280px] relative bg-gradient-to-b from-amber-100/50 to-transparent flex items-center justify-center">
+                                <span className="text-4xl opacity-20">🌸</span>
+                            </div>
+                        )}
+
+                        {/* Text Content */}
+                        <div className="p-6 w-full text-left z-10">
+                            <span className="inline-block px-3 py-1 bg-white text-[#C45E2A] rounded-full text-[9px] font-bold tracking-widest uppercase mb-4 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-[#F2E0D4]">
+                                {eidSection.subtitle || 'LIMITED EDITION'}
+                            </span>
+                            <h3 className="text-3xl font-display font-medium text-[#1a1a24] mb-3 leading-tight">{eidSection.title}</h3>
+                            <p className="text-sm text-gray-500 mb-6 leading-relaxed line-clamp-2">{eidSection.content?.description}</p>
+
+                            {eidSection.content?.price && (
+                                <div className="flex items-center gap-2 mb-6">
+                                    <span className="text-2xl font-display font-bold text-[#1a1a24] tracking-tight">₹{Number(eidSection.content.price).toLocaleString('en-IN')}</span>
+                                    {eidSection.content.compare_price && (
+                                        <span className="text-sm font-medium text-gray-400 line-through">₹{Number(eidSection.content.compare_price).toLocaleString('en-IN')}</span>
+                                    )}
+                                </div>
+                            )}
+
+                            <Link to={eidSection.content?.cta_link || "/shop"} className="inline-flex items-center justify-center gap-2 bg-[#1a1a24] text-white px-6 py-3 rounded-full text-xs font-bold hover:bg-black transition-colors shadow-lg shadow-black/10 w-fit">
+                                {eidSection.content?.cta_text || 'BUY NOW'} <ChevronRight size={14} className="stroke-[3]" />
+                            </Link>
+                        </div>
                     </div>
                 </section>
             )}

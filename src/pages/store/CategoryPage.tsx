@@ -43,9 +43,17 @@ export default function CategoryPage() {
     return (
         <div className="animate-fade-in">
             {/* Hero */}
-            <div className="bg-gradient-to-r from-blush-100 to-blush-50 px-4 py-6">
-                <h1 className="font-display text-2xl font-bold text-charcoal">{category?.name || 'All Products'}</h1>
-                {category?.description && <p className="text-sm text-gray-600 mt-1">{category.description}</p>}
+            <div className={`relative px-4 py-6 min-h-[140px] flex flex-col justify-center ${category?.image_url ? 'bg-charcoal' : 'bg-gradient-to-r from-blush-100 to-blush-50'}`}>
+                {category?.image_url && (
+                    <>
+                        <img src={category.image_url} alt={category.name} className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" />
+                        <div className="absolute inset-0 bg-black/30" />
+                    </>
+                )}
+                <div className="relative z-10">
+                    <h1 className={`font-display text-3xl font-bold ${category?.image_url ? 'text-white' : 'text-charcoal'}`}>{category?.name || 'All Products'}</h1>
+                    {category?.description && <p className={`text-sm mt-2 max-w-2xl leading-relaxed ${category?.image_url ? 'text-gray-200' : 'text-gray-600'}`}>{category.description}</p>}
+                </div>
             </div>
 
             {/* Category Filters */}

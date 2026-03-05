@@ -17,6 +17,7 @@ export default function CategoriesPage() {
     const [showModal, setShowModal] = useState(false);
     const [editing, setEditing] = useState<Category | null>(null);
     const [form, setForm] = useState({ name: '', description: '', image_url: '' });
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     useEffect(() => { loadCategories(); }, []);
 
@@ -39,6 +40,23 @@ export default function CategoriesPage() {
 
     function slugify(text: string) {
         return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        setUploadingImage(true);
+        try {
+            const ext = file.name.substring(file.name.lastIndexOf('.'));
+            const filename = `categories/${Date.now()}${ext}`;
+            const { data, error: uploadError } = await insforge.storage.from('product-images').upload(filename, file);
+            if (uploadError) throw uploadError;
+            if (data) setForm({ ...form, image_url: data.url });
+        } catch (err: any) {
+            alert('Upload failed: ' + err.message);
+        } finally {
+            setUploadingImage(false);
+        }
     }
 
     async function handleSave(e: React.FormEvent) {
@@ -110,7 +128,30 @@ export default function CategoriesPage() {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                                 <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-admin-primary/30 resize-none" />
                             </div>
-                            <button type="submit" className="w-full btn-admin py-3">{editing ? 'Update' : 'Create'}</button>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Category Image</label>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center overflow-hidden shrink-0">
+                                        {form.image_url ? (
+                                            <img src={form.image_url} alt="Preview" className="w-full h-full object-cover" />
+                                        ) : (
+                                            <FolderOpen className="text-gray-300" size={24} />
+                                        )}
+                                    </div>
+                                    <div className="flex-1">
+                                        <label className="inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-admin-primary transition-colors cursor-pointer w-full sm:w-auto">
+                                            {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                                            <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} className="hidden" />
+                                        </label>
+                                        {form.image_url && (
+                                            <button type="button" onClick={() => setForm({ ...form, image_url: '' })} className="block mt-2 text-xs text-red-500 hover:underline">
+                                                Remove Image
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" disabled={uploadingImage} className="w-full btn-admin py-3 disabled:opacity-50">{editing ? 'Update' : 'Create'}</button>
                         </form>
                     </div>
                 </div>

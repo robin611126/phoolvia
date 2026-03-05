@@ -29,6 +29,7 @@ export default function HomepageEditorPage() {
     const [editTitle, setEditTitle] = useState('');
     const [editSubtitle, setEditSubtitle] = useState('');
     const [editImageUrl, setEditImageUrl] = useState('');
+    const [editCtaLink, setEditCtaLink] = useState('');
     const [uploadingImage, setUploadingImage] = useState(false);
 
     useEffect(() => { loadSections(); }, []);
@@ -49,6 +50,7 @@ export default function HomepageEditorPage() {
         setEditTitle(section.title || '');
         setEditSubtitle(section.subtitle || '');
         setEditImageUrl(section.image_url || '');
+        setEditCtaLink(section.content?.cta_link || '');
     }
 
     async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -70,14 +72,29 @@ export default function HomepageEditorPage() {
 
     async function saveEdit() {
         if (!editSection) return;
-        await insforge.database.from('homepage_sections').update({ title: editTitle, subtitle: editSubtitle, image_url: editImageUrl }).eq('id', editSection.id);
-        setSections(sections.map(s => s.id === editSection.id ? { ...s, title: editTitle, subtitle: editSubtitle, image_url: editImageUrl } : s));
+
+        const updatedContent = { ...(editSection.content || {}), cta_link: editCtaLink };
+
+        await insforge.database.from('homepage_sections').update({
+            title: editTitle,
+            subtitle: editSubtitle,
+            image_url: editImageUrl,
+            content: updatedContent
+        }).eq('id', editSection.id);
+
+        setSections(sections.map(s => s.id === editSection.id ? {
+            ...s,
+            title: editTitle,
+            subtitle: editSubtitle,
+            image_url: editImageUrl,
+            content: updatedContent
+        } : s));
         setEditSection(null);
     }
 
-    async function addSection() {
+    async function addSection(type: string = 'custom') {
         const { data } = await insforge.database.from('homepage_sections').insert({
-            section_type: 'custom', title: 'New Section', subtitle: '', content: {}, sort_order: sections.length + 1, is_visible: true
+            section_type: type, title: type === 'hero_banner' ? 'New Banner' : 'New Section', subtitle: '', content: {}, sort_order: sections.length + 1, is_visible: true
         }).select();
         if (data) setSections([...sections, data[0]]);
     }
@@ -121,6 +138,7 @@ export default function HomepageEditorPage() {
                             <div className="mt-4 pt-4 border-t border-gray-100 space-y-3">
                                 <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} placeholder="Section Title" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" />
                                 <input type="text" value={editSubtitle} onChange={(e) => setEditSubtitle(e.target.value)} placeholder="Subtitle" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" />
+                                <input type="text" value={editCtaLink} onChange={(e) => setEditCtaLink(e.target.value)} placeholder="Button Link (e.g. /product/123 or /shop)" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm" />
 
                                 <div className="space-y-2">
                                     <label className="text-xs font-medium text-gray-700">Section Image (Hero Banner / Promo)</label>
@@ -148,10 +166,14 @@ export default function HomepageEditorPage() {
                 ))}
             </div>
 
-            <button onClick={addSection} className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-gray-400 hover:text-admin-primary hover:border-admin-primary/50 transition-colors flex items-center justify-center gap-2 text-sm font-medium">
-                <Plus size={18} />
-                Add New Section
-            </button>
+            <div className="flex flex-col sm:flex-row gap-3">
+                <button onClick={() => addSection('custom')} className="flex-1 py-4 border-2 border-dashed border-gray-200 rounded-xl text-gray-400 hover:text-admin-primary hover:border-admin-primary/50 transition-colors flex items-center justify-center gap-2 text-sm font-medium">
+                    <Plus size={18} /> Add Custom Section
+                </button>
+                <button onClick={() => addSection('hero_banner')} className="flex-1 py-4 border-2 border-dashed border-gray-200 rounded-xl text-gray-400 hover:text-blush-500 hover:border-blush-500/50 transition-colors flex items-center justify-center gap-2 text-sm font-medium">
+                    <Plus size={18} /> Add Hero Slider Banner
+                </button>
+            </div>
         </div>
     );
 }
