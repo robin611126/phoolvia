@@ -1,10 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MessageCircle, Mail, Send, ChevronDown, ChevronUp, MapPin, Clock, Phone } from 'lucide-react';
+import { insforge } from '../../lib/insforge';
 
 export default function ContactPage() {
     const [form, setForm] = useState({ name: '', orderNumber: '', message: '' });
     const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
     const [submitted, setSubmitted] = useState(false);
+
+    // Store Settings State
+    const [storePhone, setStorePhone] = useState('919876543210');
+    const [storeEmail, setStoreEmail] = useState('contact@phoolviaa.com');
+    const [storeAddress, setStoreAddress] = useState('PHOOLVIAA Studio\nNear City Center, India');
+    const [displayPhone, setDisplayPhone] = useState('+91 98765 43210');
+
+    useEffect(() => {
+        async function fetchSettings() {
+            const { data } = await insforge.database.from('store_settings').select('*').single();
+            if (data) {
+                if (data.whatsapp_number) {
+                    setDisplayPhone(data.whatsapp_number);
+                    let cleanPhone = data.whatsapp_number.replace(/\D/g, '');
+                    if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+                    setStorePhone(cleanPhone);
+                }
+                if (data.contact_email) setStoreEmail(data.contact_email);
+                if (data.address) setStoreAddress(data.address);
+            }
+        }
+        fetchSettings();
+    }, []);
 
     const faqs = [
         { q: 'How long does delivery take?', a: 'Standard delivery takes 3-5 business days. Express delivery is available for select locations within 1-2 days.' },
@@ -31,11 +55,11 @@ export default function ContactPage() {
             <div className="px-4 py-6 space-y-6">
                 {/* Quick Contact */}
                 <div className="grid grid-cols-2 gap-3">
-                    <a href="https://wa.me/919876543210" target="_blank" className="flex items-center gap-3 p-4 bg-emerald-50 rounded-2xl border border-emerald-100 hover:bg-emerald-100 transition-colors">
+                    <a href={`https://wa.me/${storePhone}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 bg-emerald-50 rounded-2xl border border-emerald-100 hover:bg-emerald-100 transition-colors">
                         <MessageCircle size={22} className="text-emerald-600" />
                         <div><p className="text-sm font-semibold text-emerald-700">WhatsApp</p><p className="text-xs text-emerald-600">Quick Chat</p></div>
                     </a>
-                    <a href="mailto:contact@phoolviaa.com" className="flex items-center gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100 hover:bg-blue-100 transition-colors">
+                    <a href={`mailto:${storeEmail}`} className="flex items-center gap-3 p-4 bg-blue-50 rounded-2xl border border-blue-100 hover:bg-blue-100 transition-colors">
                         <Mail size={22} className="text-blue-600" />
                         <div><p className="text-sm font-semibold text-blue-700">Email Us</p><p className="text-xs text-blue-600">24hr Reply</p></div>
                     </a>
@@ -77,10 +101,10 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-charcoal mb-3 flex items-center gap-2">
                         <MapPin size={16} className="text-blush-500" /> Studio Location
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2">PHOOLVIAA Studio<br />Near City Center, India</p>
+                    <p className="text-sm text-gray-600 mb-2 whitespace-pre-wrap">{storeAddress}</p>
                     <div className="flex items-center gap-4 text-xs text-gray-500">
                         <span className="flex items-center gap-1"><Clock size={12} />Mon-Sat: 10AM-7PM</span>
-                        <span className="flex items-center gap-1"><Phone size={12} />+91 98765 43210</span>
+                        <span className="flex items-center gap-1"><Phone size={12} />{displayPhone}</span>
                     </div>
                 </section>
             </div>

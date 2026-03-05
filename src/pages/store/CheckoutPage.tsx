@@ -133,6 +133,21 @@ export default function CheckoutPage() {
 
             localStorage.removeItem('phoolviaa_cart');
             window.dispatchEvent(new Event('cart-updated'));
+
+            // Send Confirmation Emails via Edge Function
+            try {
+                // To Customer
+                insforge.functions.invoke('send-email', {
+                    body: { type: 'order_confirmed', email: form.email, orderDetails: orderData }
+                });
+                // To Admin
+                insforge.functions.invoke('send-email', {
+                    body: { type: 'admin_alert', email: 'admin@phoolviaa.com', orderDetails: orderData }
+                });
+            } catch (err) {
+                console.error("Failed to trigger email function", err);
+            }
+
             navigate('/order-success', { state: { orderNumber: orderData.order_number, total, name: form.name } });
         }
         setLoading(false);
