@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global Store Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-10">
+<div class="flex size-12 shrink-0 items-center text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Store Settings</h2>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Basic Information Section -->
+<div class="bg-white dark:bg-slate-900 mt-4 mx-4 rounded-xl p-4 shadow-sm">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">Basic Information</h3>
+<div class="flex flex-col gap-4">
+<label class="flex flex-col">
+<span class="text-sm font-medium leading-normal pb-1">Store Name</span>
+<input class="form-input flex w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-12 px-3 text-base" value="PHOOLVIAA"/>
+</label>
+<div class="flex flex-col gap-3 mt-2">
+<span class="text-sm font-medium leading-normal">Store Logo</span>
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-20 w-20 border border-slate-200 dark:border-slate-700 shadow-sm" data-alt="Store logo placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIgmSMiYhcaaj5TGnFlpYFbOpEOiwICLg839c3AP6oNuHuQRRZSK-dX2wdK-48dgnPbOT70LKEiDCKc3x5N8u3tRD4tOCtfBhUAyHGfhg8BCA_tyl7A1TadU3M4h-rMdzmaN9Sm8IF-NYgePexQnTGOwa2F4KFGejarSjM41mSDEGBZS9U_C5sWjlwT3WTm3ymSohNxmcJVZjNj5xTpaR8C8mH6algKOIWb1wNpUkSN_mQT9hw7lzq7oN5EPuIqd61m0gHEZFIsBJu");'></div>
+<div class="flex flex-col flex-1 gap-2">
+<p class="text-xs text-slate-500 dark:text-slate-400">Recommended size: 512x512px. Max size: 2MB.</p>
+<button class="flex items-center justify-center rounded-lg h-9 px-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                    Upload Logo
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact Section -->
+<div class="bg-white dark:bg-slate-900 mt-4 mx-4 rounded-xl p-4 shadow-sm">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">Contact Details</h3>
+<div class="flex flex-col gap-4">
+<label class="flex flex-col">
+<span class="text-sm font-medium leading-normal pb-1">Contact Email</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</span>
+<input class="form-input flex w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-12 pl-10 pr-3 text-base" type="email" value="contact@phoolviaa.com"/>
+</div>
+</label>
+<label class="flex flex-col">
+<span class="text-sm font-medium leading-normal pb-1">WhatsApp Number</span>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</span>
+<input class="form-input flex w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-12 pl-10 pr-3 text-base" type="tel" value="+91 98765 43210"/>
+</div>
+</label>
+</div>
+</div>
+<!-- Shipping Configuration -->
+<div class="bg-white dark:bg-slate-900 mt-4 mx-4 rounded-xl p-4 shadow-sm">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">Shipping Configuration</h3>
+<div class="flex flex-col gap-4">
+<label class="flex flex-col">
+<span class="text-sm font-medium leading-normal pb-1">Flat Shipping Rate (₹)</span>
+<input class="form-input flex w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-12 px-3 text-base" type="number" value="50"/>
+</label>
+<label class="flex flex-col">
+<span class="text-sm font-medium leading-normal pb-1">Free Shipping Threshold (₹)</span>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Orders above this amount will have free shipping.</p>
+<input class="form-input flex w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-12 px-3 text-base" type="number" value="500"/>
+</label>
+</div>
+</div>
+<!-- Payment Methods -->
+<div class="bg-white dark:bg-slate-900 mt-4 mx-4 rounded-xl p-4 shadow-sm mb-6">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">Payment Methods</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 dark:bg-slate-800 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">qr_code_scanner</span>
+</div>
+<div>
+<p class="text-base font-medium">UPI</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Google Pay, PhonePe, Paytm</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 dark:bg-slate-800 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">payments</span>
+</div>
+<div>
+<p class="text-base font-medium">Cash on Delivery (COD)</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Pay when order arrives</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 dark:bg-slate-800 p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">credit_card</span>
+</div>
+<div>
+<p class="text-base font-medium">Online Payments</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Cards, Netbanking</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<div class="px-4 pb-6">
+<button class="w-full h-12 bg-primary text-white rounded-lg font-bold text-base shadow-sm hover:bg-primary/90 transition-colors">
+                    Save Changes
+                </button>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-safe pt-2 z-20 pb-4">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Orders</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Products</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">group</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Customers</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

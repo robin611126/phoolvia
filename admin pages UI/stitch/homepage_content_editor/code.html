@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Homepage Content Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex items-center p-4 pb-2 justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-10">
+<a class="flex size-12 shrink-0 items-center text-slate-900 dark:text-slate-100" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<h2 class="text-lg font-bold leading-tight flex-1 text-center">Homepage Editor</h2>
+<div class="flex w-12 items-center justify-end">
+<a class="text-primary text-sm font-bold leading-normal shrink-0 flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">preview</span>
+                Preview
+            </a>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<div class="p-4">
+<h3 class="text-lg font-bold leading-tight mb-4">Page Sections</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Drag to reorder sections or toggle visibility. Click to edit content.</p>
+<div class="space-y-3">
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<div class="text-slate-400 cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0 size-10">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-base font-semibold leading-normal truncate">Hero Banner</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Flowers That Never Fade</p>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-primary p-1 justify-end">
+<div class="h-5 w-5 rounded-full bg-white shadow-sm"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<div class="text-slate-400 cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 shrink-0 size-10">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-base font-semibold leading-normal truncate">Eid Special</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Featured Collection</p>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-primary p-1 justify-end">
+<div class="h-5 w-5 rounded-full bg-white shadow-sm"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<div class="text-slate-400 cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-green-500/10 text-green-500 shrink-0 size-10">
+<span class="material-symbols-outlined">local_mall</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-base font-semibold leading-normal truncate">Best Sellers</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Product Carousel (8 items)</p>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-primary p-1 justify-end">
+<div class="h-5 w-5 rounded-full bg-white shadow-sm"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm opacity-60">
+<div class="text-slate-400 cursor-grab active:cursor-grabbing">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="flex items-center justify-center rounded-lg bg-purple-500/10 text-purple-500 shrink-0 size-10">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-base font-semibold leading-normal truncate">Newsletter Signup</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Footer Promo</p>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary p-1">
+<span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+</button>
+<label class="relative flex h-7 w-12 cursor-pointer items-center rounded-full bg-slate-200 dark:bg-slate-700 p-1 justify-start">
+<div class="h-5 w-5 rounded-full bg-white shadow-sm"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 px-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl text-slate-500 dark:text-slate-400 font-semibold flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">add</span>
+                Add New Section
+            </button>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pb-6 pt-2 z-20">
+<div class="flex gap-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Products</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<p class="text-xs font-bold leading-normal tracking-[0.015em]">Storefront</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

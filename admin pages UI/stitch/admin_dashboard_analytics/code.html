@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1313",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md z-10 border-b border-primary/30 dark:border-primary/10">
+<button class="flex size-12 shrink-0 items-center text-slate-900 dark:text-slate-100 justify-center">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Admin Dashboard</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full size-10 bg-primary/20 dark:bg-primary/10 text-slate-900 dark:text-slate-100 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined text-xl">person</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Quick Actions -->
+<div class="flex justify-stretch px-4 py-4">
+<div class="flex flex-1 gap-3 flex-wrap justify-between">
+<button class="flex flex-1 min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary dark:bg-primary/20 text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal tracking-[0.015em] border border-primary/50 dark:border-primary/30 shadow-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined mr-2 text-[20px]">add_circle</span>
+<span class="truncate">Add Product</span>
+</button>
+<button class="flex flex-1 min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal tracking-[0.015em] border border-slate-200 dark:border-slate-700 shadow-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined mr-2 text-[20px]">edit_document</span>
+<span class="truncate">Update Home</span>
+</button>
+</div>
+</div>
+<!-- Key Metrics Cards -->
+<div class="grid grid-cols-2 gap-4 px-4 pb-4">
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">Total Revenue</p>
+<span class="material-symbols-outlined text-primary dark:text-primary/70 text-lg">account_balance_wallet</span>
+</div>
+<p class="tracking-tight text-2xl font-bold leading-tight mt-1">$45,231</p>
+<div class="flex items-center gap-1 mt-1 text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<p class="text-xs font-semibold leading-normal">+15% <span class="text-slate-400 dark:text-slate-500 font-normal">vs last month</span></p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">Total Orders</p>
+<span class="material-symbols-outlined text-primary dark:text-primary/70 text-lg">shopping_bag</span>
+</div>
+<p class="tracking-tight text-2xl font-bold leading-tight mt-1">1,234</p>
+<div class="flex items-center gap-1 mt-1 text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<p class="text-xs font-semibold leading-normal">+5% <span class="text-slate-400 dark:text-slate-500 font-normal">vs last month</span></p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">Pending Orders</p>
+<span class="material-symbols-outlined text-amber-500 text-lg">hourglass_empty</span>
+</div>
+<p class="tracking-tight text-2xl font-bold leading-tight mt-1">56</p>
+<div class="flex items-center gap-1 mt-1 text-rose-600 dark:text-rose-400">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<p class="text-xs font-semibold leading-normal">-2% <span class="text-slate-400 dark:text-slate-500 font-normal">vs last month</span></p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-sm font-medium leading-normal text-slate-500 dark:text-slate-400">Total Products</p>
+<span class="material-symbols-outlined text-primary dark:text-primary/70 text-lg">inventory_2</span>
+</div>
+<p class="tracking-tight text-2xl font-bold leading-tight mt-1">890</p>
+<div class="flex items-center gap-1 mt-1 text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<p class="text-xs font-semibold leading-normal">+10% <span class="text-slate-400 dark:text-slate-500 font-normal">vs last month</span></p>
+</div>
+</div>
+</div>
+<!-- Sales Performance Chart Placeholder -->
+<div class="px-4 py-4">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] pb-4">Sales Performance</h3>
+<div class="w-full h-48 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 p-4 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<!-- Abstract chart representation -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent dark:from-primary/5"></div>
+<div class="flex justify-between text-xs text-slate-400 dark:text-slate-500 relative z-10">
+<span>$10k</span>
+</div>
+<div class="flex justify-between text-xs text-slate-400 dark:text-slate-500 relative z-10">
+<span>$5k</span>
+</div>
+<div class="flex justify-between text-xs text-slate-400 dark:text-slate-500 relative z-10 border-b border-slate-100 dark:border-slate-700 pb-1">
+<span>$0</span>
+</div>
+<div class="absolute bottom-6 left-12 right-4 h-32 flex items-end justify-between z-10 px-2">
+<div class="w-1/6 h-[40%] bg-primary/40 dark:bg-primary/20 rounded-t-sm"></div>
+<div class="w-1/6 h-[60%] bg-primary/60 dark:bg-primary/30 rounded-t-sm"></div>
+<div class="w-1/6 h-[45%] bg-primary/40 dark:bg-primary/20 rounded-t-sm"></div>
+<div class="w-1/6 h-[80%] bg-primary/80 dark:bg-primary/40 rounded-t-sm"></div>
+<div class="w-1/6 h-[70%] bg-primary/70 dark:bg-primary/30 rounded-t-sm"></div>
+<div class="w-1/6 h-[95%] bg-primary dark:bg-primary/50 rounded-t-sm relative">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] py-0.5 px-1.5 rounded opacity-0 transition-opacity">Peak</div>
+</div>
+</div>
+<div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 mt-2 ml-8 relative z-10">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+</div>
+</div>
+</div>
+<!-- Recent Orders Table -->
+<div class="px-4 py-4 mb-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em]">Recent Orders</h3>
+<a class="text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200" href="#">View All</a>
+</div>
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 uppercase border-b border-slate-100 dark:border-slate-700">
+<tr>
+<th class="px-4 py-3 font-medium" scope="col">Order ID</th>
+<th class="px-4 py-3 font-medium" scope="col">Customer</th>
+<th class="px-4 py-3 font-medium" scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-white dark:bg-slate-800 border-b border-slate-50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-medium">#ORD-001</td>
+<td class="px-4 py-3">Sarah Johnson</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center rounded-md bg-amber-50 dark:bg-amber-900/30 px-2 py-1 text-xs font-medium text-amber-700 dark:text-amber-400 ring-1 ring-inset ring-amber-600/20">Pending</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-800 border-b border-slate-50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-medium">#ORD-002</td>
+<td class="px-4 py-3">Michael Chen</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center rounded-md bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/20">Shipped</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-800 border-b border-slate-50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-medium">#ORD-003</td>
+<td class="px-4 py-3">Emma Wilson</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center rounded-md bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-inset ring-emerald-600/20">Shipped</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+<td class="px-4 py-3 font-medium">#ORD-004</td>
+<td class="px-4 py-3">James Davis</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center rounded-md bg-rose-50 dark:bg-rose-900/30 px-2 py-1 text-xs font-medium text-rose-700 dark:text-rose-400 ring-1 ring-inset ring-rose-600/20">Cancelled</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 pb-safe pt-2 z-20" style="padding-bottom: env(safe-area-inset-bottom, 12px);">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-slate-900 dark:text-slate-100" href="#">
+<div class="flex h-8 items-center justify-center relative">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="absolute -bottom-1 w-1 h-1 bg-slate-900 dark:bg-slate-100 rounded-full"></span>
+</div>
+<p class="text-[10px] font-semibold leading-normal tracking-wide">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">local_shipping</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Orders</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Products</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</div>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

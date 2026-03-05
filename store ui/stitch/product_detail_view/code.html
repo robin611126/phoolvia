@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Detail View - PHOOLVIAA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "primary-dark": "#e0b8b8",
+                        "background-light": "#fcfbfa",
+                        "background-dark": "#1f1313",
+                        "accent": "#d4a3a3",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary selection:text-slate-900 pb-24">
+<header class="sticky top-0 z-50 flex items-center bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md p-4 justify-between transition-colors duration-300">
+<button aria-label="Go back" class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<button aria-label="Favorite" class="flex size-10 items-center justify-center rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">favorite_border</span>
+</button>
+<button aria-label="Share" class="flex size-10 items-center justify-center rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-2xl">share</span>
+</button>
+</div>
+</header>
+<main class="w-full max-w-md mx-auto relative">
+<section class="relative">
+<div class="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-3">
+<div class="flex items-stretch px-4 gap-4 w-full">
+<div class="flex-none w-full sm:w-[85%] snap-center">
+<div class="w-full aspect-[4/5] bg-primary/20 rounded-2xl overflow-hidden shadow-sm relative">
+<img alt="Soft pink handmade crochet rose bouquet" class="w-full h-full object-cover" data-alt="Soft pink handmade crochet rose bouquet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOeLoYVoe2Hjr1gGAtH0MbkfB9RGripx-Xku96fBgPLH_hiVKD37kSkbQelPSr9Z3sTix5LJUCT-KfZ3zaEJ9-RF1WTykLAdlVph5KVwGZre0nvZ2f6iTUyxdDcOeJXf2WfYrP674_0zuFDzXGE3hGsJGqOAz2iEmDj1WFBTlkUQHjfpFRDcV8jfY1TRJYt8Q4emAb_HH4QE7pQHig0q7iCxxNjXdfOVI18PqENAUjh0Ys78gjbStyVnfY8-UdA9zWi7sNYYVLcbeC"/>
+</div>
+</div>
+<div class="flex-none w-full sm:w-[85%] snap-center">
+<div class="w-full aspect-[4/5] bg-primary/20 rounded-2xl overflow-hidden shadow-sm relative">
+<img alt="Close up of delicate crochet flower petals" class="w-full h-full object-cover" data-alt="Close up of delicate crochet flower petals" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9BgqpAAOuI3smp6msCj6SLIx3qlOPAvqijNR1I5YYGBrnQINhSgjPBZ1HbvrqDUJNBoHiFrO9op33Bobcszw1TWaTVbEx8nFAHtOYQSw-FzQtBDXucP4IMIEjIuhvY0iV3h_ZsWTmmToahMKhsK2Ae_xNIb6wAkavygTCL3j4WKMCrn5S-D7sclH_XWA7Y1y4b5aKt939w5GuN62vOCulYpetNsIMVTnmStb1fEe9RHIIxjcVJ810vkQkIRHECPh3zYJLxWB7mcQ6"/>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center items-center gap-1.5 pb-2">
+<div class="w-5 h-1.5 rounded-full bg-accent"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary-dark/40 dark:bg-slate-700"></div>
+</div>
+</section>
+<section class="px-5 pt-4 pb-4">
+<div class="flex justify-between items-start gap-4 mb-2">
+<h1 class="text-3xl font-serif font-bold leading-tight text-slate-900 dark:text-slate-100">Handmade Crochet Bouquet</h1>
+</div>
+<div class="flex items-center gap-1.5 mb-3">
+<div class="flex items-center text-accent">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<div class="flex items-baseline gap-1.5 font-serif">
+<span class="text-sm font-semibold text-slate-800 dark:text-slate-100">4.9/5</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 tracking-wide underline decoration-slate-200 dark:decoration-slate-700 underline-offset-2">(128 reviews)</span>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-4">
+<span class="text-lg text-slate-400 dark:text-slate-500 line-through font-serif">$150.00</span>
+<p class="text-2xl font-serif text-slate-800 dark:text-slate-100">$120.00</p>
+<span class="px-2.5 py-1 text-[11px] font-semibold tracking-wider uppercase bg-[#fbe7e4] text-[#dca4a4] rounded-full">Sale</span>
+</div>
+<div class="mb-6">
+<h3 class="text-sm text-slate-500 dark:text-slate-400 mb-2">Quantity</h3>
+<div class="flex items-center border border-slate-300 dark:border-slate-600 rounded-md w-max">
+<button aria-label="Decrease quantity" class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="px-6 py-2 font-medium border-x border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200">1</span>
+<button aria-label="Increase quantity" class="px-4 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-3 mb-6">
+<button class="w-full bg-transparent border border-slate-800 dark:border-slate-200 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full py-3.5 px-6 font-semibold flex items-center justify-center transition-colors">
+        Add to cart
+    </button>
+<button class="w-full bg-[#ead4cd] hover:bg-[#e0c7c0] text-slate-800 rounded-full py-3.5 px-6 font-semibold flex items-center justify-center transition-colors">
+        Buy it now
+    </button>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-relaxed">
+                A timeless expression of love. This exquisite, handmade crochet bouquet features intricate floral designs in soft, romantic hues. Perfect for gifting or adding a touch of everlasting beauty to your home. Each petal is meticulously crafted by artisans.
+            </p>
+</section>
+<hr class="border-primary/30 mx-5 my-4"/>
+<section class="px-5 py-4">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">Select Palette</h3>
+<div class="flex gap-4">
+<button aria-label="Select Blush Pink palette" class="relative flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 rounded-full bg-[#f8e7e7] shadow-sm ring-2 ring-accent ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark"></div>
+<span class="text-xs font-medium">Blush</span>
+</button>
+<button aria-label="Select Ivory Cream palette" class="relative flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 rounded-full bg-[#fdfbf7] shadow-sm ring-2 ring-transparent group-hover:ring-slate-300 dark:group-hover:ring-slate-600 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark transition-all"></div>
+<span class="text-xs font-medium text-slate-500">Ivory</span>
+</button>
+<button aria-label="Select Dusty Rose palette" class="relative flex flex-col items-center gap-2 group">
+<div class="w-12 h-12 rounded-full bg-[#dca4a4] shadow-sm ring-2 ring-transparent group-hover:ring-slate-300 dark:group-hover:ring-slate-600 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark transition-all"></div>
+<span class="text-xs font-medium text-slate-500">Rose</span>
+</button>
+</div>
+</section>
+<section class="px-5 py-6 flex flex-col gap-2">
+<details class="group border-b border-primary/30 pb-4">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<span class="text-lg font-serif font-medium">Product Details</span>
+<span class="material-symbols-outlined transition-transform group-open:-rotate-180 text-accent">expand_more</span>
+</summary>
+<div class="pt-4 text-sm text-slate-600 dark:text-slate-300 space-y-2">
+<p>• Premium milk cotton yarn</p>
+<p>• Flexible wire stems for easy arranging</p>
+<p>• Height: Approx. 14 inches</p>
+<p>• Wrapped in high-quality textured paper with silk ribbon</p>
+</div>
+</details>
+<details class="group border-b border-primary/30 pb-4 pt-2">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<span class="text-lg font-serif font-medium">Care Instructions</span>
+<span class="material-symbols-outlined transition-transform group-open:-rotate-180 text-accent">expand_more</span>
+</summary>
+<div class="pt-4 text-sm text-slate-600 dark:text-slate-300">
+<p>Keep away from direct, prolonged sunlight to prevent fading. Lightly dust with a soft brush or use a hairdryer on a cool, gentle setting. Do not machine wash.</p>
+</div>
+</details>
+<details class="group border-b border-primary/30 pb-4 pt-2">
+<summary class="flex items-center justify-between cursor-pointer list-none">
+<span class="text-lg font-serif font-medium">Shipping &amp; Returns</span>
+<span class="material-symbols-outlined transition-transform group-open:-rotate-180 text-accent">expand_more</span>
+</summary>
+<div class="pt-4 text-sm text-slate-600 dark:text-slate-300">
+<p>Made to order. Please allow 5-7 business days for crafting. Standard shipping takes 3-5 days. Due to the custom nature of handmade items, returns are only accepted for damaged goods.</p>
+</div>
+</details>
+</section>
+<section class="px-5 py-8">
+<h2 class="text-2xl font-serif font-bold mb-6 text-center">You May Also Like</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="w-full aspect-square bg-primary/20 rounded-xl overflow-hidden relative">
+<img alt="Single handmade crochet sunflower" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Single handmade crochet sunflower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOOZMqqZfPYotuhtuCr57gjXR1alMqow6-1pqtv2Zgw0cDp9bVXptf4pwyuzQDou7P83vDchKRqkaINIKiVR7PYWga9lEM6Mms4OvQ_lYD9m7wW5bEanWbakyDxeKO7hcTqqNg4GJkpieymYQpyGqt0sVaZSZ8IlksJFju6UOZuPCa4tUH8QRETqfriL17oi6CgUobtNDHQYIT8xyT-BQPj9Th4HQf6gqpxfQVZh2ccGMkfF6NcRFRonpD6B7Pn4tsQLeNeSKo1Uwh"/>
+</div>
+<h4 class="font-medium text-sm mt-1 line-clamp-1">Single Sunflower</h4>
+<p class="text-accent text-sm font-medium">$35.00</p>
+</div>
+<div class="flex flex-col gap-2 cursor-pointer group">
+<div class="w-full aspect-square bg-primary/20 rounded-xl overflow-hidden relative">
+<img alt="Crochet tulip arrangement in vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Crochet tulip arrangement in vase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMX1729LV4EUVVAL88PV96fVI8ReHzDEgasKz5g0cbcS-bsR6JMc0hPVp42HswgrFb3sThLCGp7yls3QwvZ2fE1GDKYZ8LJB83JINTE6bs0u7uHv04rIhvnOVykdA_YOekYiSy3UjNDKsmQAo4xaY4KMP11_CyfixBbmYeKJDydA2lrO10y-KX65BntG8vhTMqPVQlHFBXe2O_fuXItzH2LRNSNHzwgWZqqpDlTI_ImpPta1Z0SNhtiSFCIsYujZ6eU6TLOBPXl23n"/>
+</div>
+<h4 class="font-medium text-sm mt-1 line-clamp-1">Tulip Arrangement</h4>
+<p class="text-accent text-sm font-medium">$85.00</p>
+</div>
+</div>
+</section>
+</main>
+</body></html>

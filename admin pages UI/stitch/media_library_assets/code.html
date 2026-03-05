@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PHOOLVIAA - Media Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur z-10 border-b border-slate-200 dark:border-slate-800">
+<button class="flex size-12 shrink-0 items-center justify-center text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Media Library</h2>
+<button class="flex w-12 items-center justify-end">
+<span class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0">Select</span>
+</button>
+</div>
+<!-- Search -->
+<div class="px-4 py-3">
+<label class="flex flex-col w-full h-12">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-shadow">
+<div class="flex items-center justify-center pl-4 pr-2 text-slate-500">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full flex-1 bg-transparent border-none text-slate-900 dark:text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-0 px-2 text-base" placeholder="Search product photos, banners..." value=""/>
+</div>
+</label>
+</div>
+<!-- Filters -->
+<div class="flex gap-3 px-4 py-2 overflow-x-auto no-scrollbar scroll-smooth">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-4 text-white">
+<span class="text-sm font-medium leading-normal">All Assets</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<span class="text-sm font-medium leading-normal">Images</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<span class="text-sm font-medium leading-normal">Banners</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<span class="text-sm font-medium leading-normal">PDFs</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<span class="text-sm font-medium leading-normal">Logos</span>
+</button>
+</div>
+<!-- Media Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 p-4 flex-1 pb-24">
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Handmade pink crochet plushie toy" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDx010-vOZz0UA-13-FpEXqXLRdOFkA6isukT5d8-sZu3vZd0kEuVUUWEWnj1y4E8QnkhMzMG0lkwL9DAtyneqP0q4SzoNZ5ny0ZykvVpqg0J9pKEXe598h1c1LIQcAqqEcgBAFvBUf6raJq8DFXc_12l5lsf8gxBBe3lM43KX8JXcGR6FRNTkVDW_A9zDudnYUnAGREvR3TWS2QyxVBtdTKC6Z8ys6Hz62aV0_CbjazR6dEOsi1OmcIRVWp61SOgdwz4brJol6_gIE");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-white/20 hover:bg-primary text-white p-2 rounded-full backdrop-blur-sm transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+<button class="bg-white/20 hover:bg-red-500 text-white p-2 rounded-full backdrop-blur-sm transition-colors">
+<span class="material-symbols-outlined text-sm">delete</span>
+</button>
+</div>
+</div>
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Crochet yarn rolls in basket" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsqz07-kRzbqr24HuSvON_g-8zeiVPGZQFITNINnXSVbS9Kl6edTGxwkxR0BK1QAmvREFXoGp4SfqMB6XkM58MTDenPn7DjX910xXjuvsstJQ1olpQf_yxN8V6J563gOIdn0_BZkEMosExUj2kYenUOPiQF_Vsl1CPN-BAlCvn2addX-7aXiT2FzbsK-mZwHTprO_o6EoEWcf7DzLvebDSN7W6KtQMLOd8Ta4eLgARsOeVM5rutmIMJrky_Xm0hmXtEQ2m-n1ERohZ");'></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-white/20 hover:bg-primary text-white p-2 rounded-full backdrop-blur-sm transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Knitted winter scarf texture close-up" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBlcGbZcVT-YjeW876I-Ug1CehuDilLmk9WbLJVT0s1v5GcYmjD1zjW2F28Se9__0fgeId4VzCLB3Yp06d1MNTAUewAWn5VGprRYYtJlBbxDH6CgpoppP0eEGugF651Nz5cEyLwwHQZMYpsBH1hUUTY8iPV4ffUl5YqFFKjfL8Nv-EhN3ZLitDOOelBfVqS8aYKc5GEzR8oWY4Ctuzcs_9b9wp6AKDw_1HKdqnASSdHGqrMSKDaPRtN7FvuK-3uvtHFXEl9DoLdl-FD");'></div>
+</div>
+<!-- Asset Item (PDF) -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center p-4">
+<span class="material-symbols-outlined text-4xl text-red-500 mb-2">picture_as_pdf</span>
+<span class="text-xs text-center text-slate-600 dark:text-slate-400 font-medium truncate w-full">pattern_guide_v2.pdf</span>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-white/20 hover:bg-primary text-white p-2 rounded-full backdrop-blur-sm transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="White crochet blanket detail shot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBBOYOfzrrISx_mmQau4IvSZUZK_moYb1TcNOOqRNUnAVjRsw3cFq-sqfGZuVfIE0nOuO64VXnCNa3B-Nmrtqa1nSlU_gbu-p_OxJms5RLv7cXd228KCHJmKj34QQY_nep6O2PDppCKGGit70VWpna0vt4ACPu5QBrcwRGfCsl6EndoNbcOPX-jW9sIvdBm1D3SEf5WqOKzP2-eXdyclFBznhe08ROLnp9XGjmaNvhISGPmOsrGlXIn7GzBPivA_jQC4VW8RR893rU9");'></div>
+</div>
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Colorful crochet granny squares laid out" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLBwwC_b4zBfSOBSBYJtZjUkXJGNQuJzbQehGQVqrWu2seeEoYn7-UsqqYFuVQm_QFGuV-h-c2u2ZHaEbP1msmoM97Zm5JXcHgedcyTk-PvmjMtzt6nVeTFIG4gel6qE6wfQXYKQhTu_om-QrLWVWyBOCiy5GKUosPo6n1IlNaYtqORsQeYwLjUgvozjx_3DV45_Os-rld1RsQY1yIr8AnUyjRbJ70Kx6v5LEy5n7WphvY8Pdr34CBOLC0SeLTPSf5C53y7Ka9cnb8");'></div>
+</div>
+<!-- Asset Item (Banner) -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700 col-span-2 row-span-1 sm:col-span-1">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Spring sale banner graphic background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRoxs0H28O3teXfhKlcRyeguHVoYyfc6_Kn92E4REHlgwLdXAYrqhj5FyfgfhA8ZqL7PszeWVcdrSjzTfyeKqMWtuu1wpJnQHhDcmH7FnQcbSlj-woryLC67XcocQ95jNog-uuQszwe1NBO_FQfUHsThDjnuDZejXapxHMNJhYFxuyTzhKPs9Pu8LNw2qSzH9m0Vffw3TeAWikDd81fX4N9pECE1-3M2kyJKNaW9DZjwntCrVTGcIWn841Gw6DDSnvUmNRUXuvZNUp");'></div>
+</div>
+<!-- Asset Item -->
+<div class="relative group aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 cursor-pointer border border-slate-200 dark:border-slate-700">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="Close up of a blue crochet stitch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBRXejcWDMoaA-KT8a6crjPLMpu0nbUcdkzi5tKS0Bv6aRQe9Y8Cr5kcCz71RNQBfO2vymLZC43I0KKU5AGNUd5d-GZi7779Pd3aCZmM4_ye8Ps9ZZve3wt5sorn8rfsVNp5B6g_YQZDgOKAdtZa0eA3J9gYHWT7N0C3b-oMxHJO1iWmHmkIb1WKm2MY87_qaxpYMDx8bTsPaNZT-WGEzFObJ7Ax_aeQBN1EUytctjt9_QcsEJTG_PnCKB7IOaI5JG-2_q_kJBXjY-o");'></div>
+</div>
+</div>
+<!-- Floating Action Button for Upload -->
+<button class="fixed bottom-20 right-4 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary/90 transition-transform active:scale-95 z-20">
+<span class="material-symbols-outlined">upload_file</span>
+</button>
+<!-- Bottom NavBar -->
+<div class="fixed bottom-0 w-full flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light dark:bg-background-dark px-4 pb-4 pt-2 z-30">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<p class="text-xs font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">inventory_2</span>
+<p class="text-xs font-medium leading-normal">Products</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">receipt_long</span>
+<p class="text-xs font-medium leading-normal">Orders</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">perm_media</span>
+<p class="text-xs font-medium leading-normal">Media</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<p class="text-xs font-medium leading-normal">Settings</p>
+</a>
+</div>
+</div>
+</body></html>

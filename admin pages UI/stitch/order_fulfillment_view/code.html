@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Details - Phoolviaa CMS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center p-4 pb-2 justify-between border-b border-slate-200 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
+<button class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight flex-1 text-center truncate">Order #ORD-2023-8921</h2>
+<button class="text-primary flex size-12 shrink-0 items-center justify-center hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">print</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Order Status Section -->
+<div class="p-4 border-b border-slate-200 dark:border-slate-800">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-500 dark:text-slate-400">Order Status</label>
+<div class="relative">
+<select class="block w-full appearance-none rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-3 pr-8 text-base text-slate-900 dark:text-slate-100 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+<option value="pending">Pending</option>
+<option selected="" value="processing">Processing</option>
+<option value="shipped">Shipped</option>
+<option value="delivered">Delivered</option>
+<option value="cancelled">Cancelled</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Placed on Oct 24, 2023 at 10:45 AM</p>
+</div>
+</div>
+<!-- Customer Information -->
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight px-4 pb-2 pt-6">Customer Information</h3>
+<div class="flex items-center gap-4 px-4 py-3 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">Aarav Patel</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">+91 98765 43210</p>
+</div>
+</div>
+<div class="shrink-0">
+<span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">VIP</span>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0 size-12">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-normal line-clamp-1">Shipping Address</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">123, Rose Villa, MG Road, Bangalore - 560001</p>
+</div>
+</div>
+<div class="shrink-0">
+<button class="flex size-8 items-center justify-center text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Order Items -->
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight px-4 pb-2 pt-6 border-t border-slate-200 dark:border-slate-800 mt-2">Order Items</h3>
+<div class="flex flex-col gap-4 px-4 py-2">
+<!-- Item 1 -->
+<div class="flex gap-4 items-start">
+<div class="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+<img alt="Marigold Garland" class="h-full w-full object-cover" data-alt="Yellow Marigold Garland" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeYilwbA08QRMzlqWACW9W8OXOXLaahz8EE_bG3k4cimU7pEzZ1KwLkoH3G6ws5yG54uadlN0N6kfNOMkjk4N1M-PKWFuHDWgUBPlvsu8I9dM0NiE8aAySeqPKZa_W1VfdMb7uYmbL-7RAgO2hY1xoVFo9Zv3lqwY5dZt3u6CGFBHC-A_tB1qG_xFaRdO_t2ZENI8hmWZcprQ5lppexmg9_cehfwSJnc3mf6TJ10mrtuPK4yMDMoy125itG10tK7MigO2znauw7bEv"/>
+</div>
+<div class="flex flex-1 flex-col justify-between h-full">
+<div>
+<h4 class="text-base font-medium text-slate-900 dark:text-slate-100 line-clamp-2">Premium Marigold Garland (Yellow)</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Qty: 2 • Size: 5ft</p>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<p class="text-base font-semibold text-slate-900 dark:text-slate-100">₹450.00</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 items-start">
+<div class="h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
+<img alt="Rose Petals" class="h-full w-full object-cover" data-alt="Red Rose Petals Packet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2GRhEgYduTXxV5DkFBqV-pq9B375faRtP-MbFkb7kmIm2uAvJSMk77ncbLOZ28Sk7Gz8WeQix8xQBR09Q-tw9ECQXqCq845c4OCQhgqWmeQUNB72iGbnu1KEQe3O0DjB0YElZg5UBkkLWjlwb2F9ATeSLFtyVLUWXm33BZ6Ju4oVQiyOKQtk4SUOnMsRtIYLpXTptfwjgUWIgtuD0K4dQuAPM3IcIXYVgjbNmYwjfcR55DLeoHAX9PxFWN_ayGCe7QxZveQJ-CxrW"/>
+</div>
+<div class="flex flex-1 flex-col justify-between h-full">
+<div>
+<h4 class="text-base font-medium text-slate-900 dark:text-slate-100 line-clamp-2">Fresh Red Rose Petals</h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Qty: 1 • Weight: 500g</p>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<p class="text-base font-semibold text-slate-900 dark:text-slate-100">₹250.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Summary -->
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight px-4 pb-2 pt-6 border-t border-slate-200 dark:border-slate-800 mt-2">Payment Summary</h3>
+<div class="px-4 py-2 space-y-3">
+<div class="flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">Subtotal (3 items)</p>
+<p class="text-sm font-medium text-slate-900 dark:text-slate-100">₹1,150.00</p>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">Shipping</p>
+<p class="text-sm font-medium text-slate-900 dark:text-slate-100">₹50.00</p>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">Tax</p>
+<p class="text-sm font-medium text-slate-900 dark:text-slate-100">₹60.00</p>
+</div>
+<div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-3 mt-3">
+<p class="text-base font-bold text-slate-900 dark:text-slate-100">Total</p>
+<p class="text-lg font-bold text-primary">₹1,260.00</p>
+</div>
+<div class="mt-2 rounded-lg bg-green-50 dark:bg-green-900/20 p-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400 text-sm">check_circle</span>
+<p class="text-sm font-medium text-green-700 dark:text-green-300">Paid via UPI</p>
+</div>
+</div>
+<!-- Admin Notes -->
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight px-4 pb-2 pt-6 border-t border-slate-200 dark:border-slate-800 mt-2">Admin Notes</h3>
+<div class="px-4 py-2 mb-8">
+<textarea class="block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Add internal notes about this order..." rows="3"></textarea>
+<button class="mt-3 inline-flex items-center justify-center rounded-lg bg-primary/10 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/20 transition-colors">
+                    Save Note
+                </button>
+</div>
+</div>
+<!-- Sticky Bottom Action -->
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-20">
+<button class="flex w-full items-center justify-center rounded-xl bg-primary px-4 py-3.5 text-base font-bold text-white shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-colors">
+                Update Order
+            </button>
+</div>
+</div>
+</body></html>

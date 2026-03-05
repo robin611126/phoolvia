@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center p-4 pb-2 justify-between bg-white dark:bg-slate-900 shadow-sm sticky top-0 z-10">
+<div class="text-slate-700 dark:text-slate-300 flex size-12 shrink-0 items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Products</h2>
+<div class="flex items-center justify-end">
+<button class="text-primary text-sm font-bold leading-normal tracking-[0.015em] shrink-0 bg-primary/10 dark:bg-primary/20 px-3 py-1.5 rounded-lg flex items-center gap-1 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> Add
+                </button>
+</div>
+</div>
+<!-- Search -->
+<div class="px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<label class="flex flex-col min-w-40 h-11 w-full relative">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-slate-700 bg-background-light dark:bg-slate-800 overflow-hidden focus-within:ring-2 focus-within:ring-primary/50">
+<div class="text-slate-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full bg-transparent border-none text-slate-900 dark:text-slate-100 focus:ring-0 placeholder:text-slate-400 px-3 text-sm font-normal" placeholder="Search products..." value=""/>
+</div>
+</label>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 p-4 overflow-x-auto no-scrollbar bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-primary text-white px-4 text-sm font-medium leading-normal whitespace-nowrap">
+                All Products
+            </button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-4 text-sm font-medium leading-normal whitespace-nowrap border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                Out of Stock
+            </button>
+<button class="flex h-8 shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-4 text-sm font-medium leading-normal whitespace-nowrap border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                Best Sellers
+            </button>
+</div>
+<!-- Product List -->
+<div class="flex flex-col flex-1 divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900">
+<!-- Product Item 1 -->
+<div class="flex flex-col p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<div class="flex gap-4 items-start mb-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Bouquet of red roses" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBCl-SqakR6NJ9GSEGPouMSO9yil7fUwHzD_7z58f8luFC6kdMxSgc2wVnsl58OeTleixSpwn6ynYnND-WkwO7j4xk8IIxQt0srypz0hbp3AiJL20CtTkxj9dB88xf93w_XL9cTE-9Hcsp2Wbrqxx-9MsBhdfG2QVuK4HD3uG72ZeHRyN76f4xarLDpZ6BgQGeUF89skhLVuTRsp5eXRhDWfXsDJcplzGEdRBlMC3w34WEpPf6QXg3NIi8pXWgiz449vs6SjTMiTRcs");'></div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<p class="text-base font-medium leading-normal truncate text-slate-900 dark:text-white">Rose Bouquet</p>
+<p class="text-sm font-normal leading-normal text-slate-500 dark:text-slate-400 truncate mt-0.5">$45.00 • Flowers</p>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<p class="text-xs font-medium leading-normal text-emerald-600 dark:text-emerald-400">In Stock (120)</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 justify-end opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="flex h-8 items-center justify-center rounded border border-slate-200 dark:border-slate-700 px-3 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[16px] mr-1">edit</span> Edit
+                    </button>
+<button class="flex h-8 items-center justify-center rounded border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 px-3 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span> Delete
+                    </button>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex flex-col p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<div class="flex gap-4 items-start mb-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Lotus incense sticks package" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYEFlgHgk4VWlXxe8TYLvsa9fRRFH31o1vSG63zrjacWslfTUirDsc_mMIaYRfH_peK7dNtTNG-4PpRtUqeM6aMpFpX08e5Mi_NPtMjiz06S4tBzOfLMj90ORTWlX0zj-p0Xq4ftUwWGqY-bjapuU9r6tah3XX76iifLQgWlFWsyC1nAlprtBRP3JEQLpuge_XgQlqSySYXXf0HNirmjizOuqHLMFtVrUSwbEX9Na5e86hRi3cUPbIj9dOhYpXr4-WNrjQlKJf6PEr");'></div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<p class="text-base font-medium leading-normal truncate text-slate-900 dark:text-white">Lotus Incense Sticks</p>
+<p class="text-sm font-normal leading-normal text-slate-500 dark:text-slate-400 truncate mt-0.5">$12.00 • Home Fragrance</p>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<p class="text-xs font-medium leading-normal text-amber-600 dark:text-amber-400">Low Stock (15)</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 justify-end opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="flex h-8 items-center justify-center rounded border border-slate-200 dark:border-slate-700 px-3 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[16px] mr-1">edit</span> Edit
+                    </button>
+<button class="flex h-8 items-center justify-center rounded border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 px-3 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span> Delete
+                    </button>
+</div>
+</div>
+<!-- Product Item 3 -->
+<div class="flex flex-col p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<div class="flex gap-4 items-start mb-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Marigold garland set" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKgEJsXdkbcMfmLbOKrnSMM-YHCLVcKoI-OqbipxLOwYpGG8lhL9ryxWK-6KezxUX09eDBwxgzkjp3a7rbuvKARuPkUwSMS2aF6mIa8qd8kSl_mNK_S56gcrq94RNpexx-BpKb1La4_MpkU3wj5lODRBETZ2R43RS0R5u53uH74RPsRXbxlGXujWZCsjxIN6CkDiYw-PiL58RE8eD7V3TJOb7IjzoN-dohZr7zbC3HRvGgauXQX3BP_Ric1Pn77gkL50E0QCppaBz-");'></div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<div class="flex items-center gap-2">
+<p class="text-base font-medium leading-normal truncate text-slate-900 dark:text-white">Marigold Garland Set</p>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-primary/10 text-primary whitespace-nowrap">BEST SELLER</span>
+</div>
+<p class="text-sm font-normal leading-normal text-slate-500 dark:text-slate-400 truncate mt-0.5">$35.00 • Decor</p>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<p class="text-xs font-medium leading-normal text-red-600 dark:text-red-400">Out of Stock (0)</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 justify-end opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="flex h-8 items-center justify-center rounded border border-slate-200 dark:border-slate-700 px-3 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[16px] mr-1">edit</span> Edit
+                    </button>
+<button class="flex h-8 items-center justify-center rounded border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 px-3 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span> Delete
+                    </button>
+</div>
+</div>
+<!-- Product Item 4 -->
+<div class="flex flex-col p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+<div class="flex gap-4 items-start mb-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0 border border-slate-200 dark:border-slate-700" data-alt="Sandalwood essential oil" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwreuxc3cX1v52ESHANKOP7nvYd7CyDN6byCNiZDvKHYEvzxNQBsvywR9jGtheJdHqC91yClHddpRkIg9R5OPJpANPo99E16oCejkn8DTeWaTvPMjVSjXOZvUJDI3Bo6VbKXFHjVacOoC_51wsTizIzDPhOPTdxgnid_-38ilhExC5WdIPBfbIasT1CIOcYGaSYTLMzrB63SCr0TaPz26ZnzSHmpnduyknBwu-RkjTd0M6wx9EXFL7jVqB85wkNFFmppp8uxU35TKU");'></div>
+<div class="flex flex-1 flex-col justify-center min-w-0">
+<p class="text-base font-medium leading-normal truncate text-slate-900 dark:text-white">Sandalwood Essential Oil</p>
+<p class="text-sm font-normal leading-normal text-slate-500 dark:text-slate-400 truncate mt-0.5">$28.00 • Oils</p>
+<div class="flex items-center gap-1.5 mt-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<p class="text-xs font-medium leading-normal text-emerald-600 dark:text-emerald-400">In Stock (84)</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 justify-end opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="flex h-8 items-center justify-center rounded border border-slate-200 dark:border-slate-700 px-3 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-[16px] mr-1">edit</span> Edit
+                    </button>
+<button class="flex h-8 items-center justify-center rounded border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 px-3 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/20">
+<span class="material-symbols-outlined text-[16px] mr-1">delete</span> Delete
+                    </button>
+</div>
+</div>
+</div>
+<div class="h-6"></div> <!-- Bottom padding -->
+</div>
+</body></html>

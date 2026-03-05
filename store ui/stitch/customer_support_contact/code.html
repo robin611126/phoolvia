@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Support &amp; Contact</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1313",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<div class="relative flex h-auto min-h-screen w-full max-w-md flex-col bg-background-light dark:bg-background-dark shadow-xl overflow-x-hidden pb-20">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur z-10">
+<button class="flex size-12 shrink-0 items-center text-slate-900 dark:text-slate-100 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight flex-1 text-center pr-12">Support</h2>
+</div>
+<!-- Hero Title -->
+<div class="px-4 pt-6 pb-4 text-center">
+<h1 class="text-3xl font-bold leading-tight tracking-tight mb-2">Get in Touch</h1>
+<p class="text-slate-600 dark:text-slate-400 text-sm">We're here to help you with your handmade crochet pieces.</p>
+</div>
+<!-- Quick Actions -->
+<div class="flex flex-col gap-3 px-4 py-2">
+<button class="flex items-center justify-center gap-2 rounded-xl h-14 px-5 bg-[#25D366]/10 text-[#25D366] font-semibold w-full hover:bg-[#25D366]/20 transition-colors">
+<span class="material-symbols-outlined">chat</span>
+<span>Chat on WhatsApp</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-xl h-14 px-5 bg-primary dark:bg-primary/20 text-slate-900 dark:text-primary font-semibold w-full hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">mail</span>
+<span>Email Support</span>
+</button>
+</div>
+<div class="px-4 py-6 flex items-center gap-4">
+<div class="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
+<span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Or send a message</span>
+<div class="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
+</div>
+<!-- Contact Form -->
+<form class="px-4 flex flex-col gap-4">
+<div>
+<label class="block text-sm font-medium mb-1.5 px-1 text-slate-700 dark:text-slate-300">Name</label>
+<input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="Jane Doe" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 px-1 text-slate-700 dark:text-slate-300">Order Number (Optional)</label>
+<input class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-slate-400" placeholder="#PH-" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium mb-1.5 px-1 text-slate-700 dark:text-slate-300">Message</label>
+<textarea class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none placeholder:text-slate-400" placeholder="How can we help you today?" rows="4"></textarea>
+</div>
+<button class="mt-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-xl h-14 font-semibold hover:opacity-90 transition-opacity" type="button">
+            Send Message
+        </button>
+</form>
+<!-- FAQ Section -->
+<div class="px-4 pt-10 pb-6">
+<h3 class="text-xl font-bold mb-4">Frequently Asked Questions</h3>
+<div class="flex flex-col gap-3">
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-medium text-sm">How long does shipping take?</span>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-medium text-sm">Can I request a custom design?</span>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-center cursor-pointer">
+<span class="font-medium text-sm text-primary">Return policy for handmade items?</span>
+<span class="material-symbols-outlined text-primary">expand_less</span>
+</div>
+<div class="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed pr-4">
+                    As each piece is custom handmade to order, we generally do not accept returns. However, if there is a defect or sizing issue, please contact us within 7 days of receiving your item.
+                </div>
+</div>
+</div>
+</div>
+<!-- Studio Location -->
+<div class="px-4 pt-6 pb-10">
+<h3 class="text-xl font-bold mb-4">Our Studio</h3>
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800">
+<div class="h-40 bg-slate-200 dark:bg-slate-800 relative w-full">
+<img alt="Map" class="w-full h-full object-cover opacity-80" data-alt="Map location for Phoolviaa studio" data-location="Mumbai, India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApdgwXDl2hZdLpDYj5qHvpLCnvA7Z6uwCYZBffbUUx2PzZ4-S9AzYxRH5vfNTxnjkskhgp7cwv3l8CtA0A6X6qQQu2e4Ce6UQGSUkAz9zDUphFFZWGGflDxDOK9hg-XJciK7gI6T4i6nHUtIb57zPHhE-Xd27PThILmjTVs6F-CPAT7YlAFqye91QXP3VVc4jy1hGWq-SLhzt6pqdw1m1P1ci6oAP3PnpG4u55hfv4_yGIuel8YqIKCSOAN4P-nF8F1uBKDtHTcfpl"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary text-slate-900 size-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" style="font-size: 20px;">location_on</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex gap-4 items-start">
+<span class="material-symbols-outlined text-slate-400 mt-0.5">home</span>
+<div>
+<p class="font-medium text-sm mb-1">PHOOLVIAA Studio</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Bandra West, Mumbai<br/>Maharashtra, India 400050</p>
+<p class="text-xs text-slate-500 mt-2">Visits by appointment only.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-0 right-0 flex gap-2 border-t border-slate-200 dark:border-slate-800 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur px-4 pb-safe pt-2 max-w-md mx-auto z-20" style="padding-bottom: env(safe-area-inset-bottom, 1rem);">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<p class="text-[10px] font-medium">Shop</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<p class="text-[10px] font-medium">Cart</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary hover:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">support_agent</span>
+<p class="text-[10px] font-medium">Support</p>
+</a>
+</div>
+</div>
+</body></html>

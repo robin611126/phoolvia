@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PHOOLVIAA - Secure Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#E89CA9",
+                        "primary-hover": "#d18b97",
+                        "background-light": "#fdfafa",
+                        "background-dark": "#1f1313",
+                        "surface": "#ffffff",
+                        "surface-dark": "#2a1c1c",
+                        "text-main": "#2c1c1c",
+                        "text-muted": "#8a6e6e",
+                        "border-light": "#f0e6e6",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 156, 169, 0.2);
+        }
+        .dark .glass-panel {
+            background: rgba(42, 28, 28, 0.7);
+            border: 1px solid rgba(232, 156, 169, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-slate-100 font-display min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-md mx-auto shadow-sm overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md p-4 pb-2 justify-between border-b border-border-light dark:border-surface-dark">
+<button aria-label="Go back" class="text-text-main dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-border-light dark:hover:bg-surface-dark transition-colors">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<h1 class="text-text-main dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Checkout</h1>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Order Summary Collapsible -->
+<div class="p-4 pt-6">
+<details class="flex flex-col rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3 group shadow-sm" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-4 py-1 list-none [&amp;::-webkit-details-marker]:hidden">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+<p class="text-text-main dark:text-slate-100 text-sm font-semibold">Order Summary</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-primary font-bold">₹12,499</span>
+<span class="material-symbols-outlined text-text-muted transition-transform duration-300 group-open:rotate-180">expand_more</span>
+</div>
+</summary>
+<div class="pt-4 pb-2 border-t border-border-light dark:border-slate-700 mt-3 space-y-4">
+<div class="flex items-start gap-3">
+<div class="w-16 h-16 rounded-lg bg-border-light dark:bg-slate-800 flex-shrink-0 bg-cover bg-center" data-alt="Pink handmade crochet bag" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVzX34UePPZLrYBbG48bF52rn9rl1e2h8tdWMMxDEr2E6jRH1dEF7NEe4JfVqVDJ5Z04CuqS00A3Q2ORVBWQjbnDP8YaotgJtRzcKGggBs-0t7ln74Kw1HxxtDoJDtCXL0q7lO_bLp8QXjft9MP9XKXVQjBnmywXnZWqpYS_d8yQW0JEV_fR9kAwoR0VSFF6QFjWU3F4Gc1iXvOKoawzUGCrtn-3f-un2W0yg7MKqAQiZENOfOO27pKtIs6ULSk3BV00w48hGOgn6b');"></div>
+<div class="flex-1">
+<p class="text-text-main dark:text-slate-100 text-sm font-medium">Rose Dust Mini Tote</p>
+<p class="text-text-muted text-xs mt-1">Qty: 1 • Color: Blush Pink</p>
+<p class="text-text-main dark:text-slate-100 text-sm font-semibold mt-1">₹12,499</p>
+</div>
+</div>
+<div class="space-y-2 pt-2 text-sm">
+<div class="flex justify-between text-text-muted">
+<span>Subtotal</span>
+<span>₹12,499</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span>Shipping</span>
+<span class="text-green-600 dark:text-green-400">Free</span>
+</div>
+<div class="flex justify-between font-bold text-text-main dark:text-slate-100 pt-2 border-t border-border-light dark:border-slate-700">
+<span>Total</span>
+<span class="text-primary">₹12,499</span>
+</div>
+</div>
+</div>
+</details>
+</div>
+<!-- Contact Info -->
+<div class="px-4 py-2">
+<h2 class="text-text-main dark:text-slate-100 text-base font-semibold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-[20px]">person</span> Contact Information
+                </h2>
+<div class="space-y-3">
+<div class="relative">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="Email Address" type="email"/>
+</div>
+<div class="relative">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="Phone Number" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Shipping Address -->
+<div class="px-4 py-6">
+<h2 class="text-text-main dark:text-slate-100 text-base font-semibold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-[20px]">local_shipping</span> Shipping Address
+                </h2>
+<div class="space-y-3">
+<div class="relative">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="Full Name" type="text"/>
+</div>
+<div class="relative">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="Street Address, Apartment, Suite" type="text"/>
+</div>
+<div class="flex gap-3">
+<div class="relative flex-1">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="City" type="text"/>
+</div>
+<div class="relative flex-1">
+<input class="form-input w-full rounded-xl border border-border-light dark:border-surface-dark bg-surface dark:bg-surface-dark px-4 py-3.5 text-sm text-text-main dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-text-muted" placeholder="PIN Code" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Method -->
+<div class="px-4 py-2">
+<h2 class="text-text-main dark:text-slate-100 text-base font-semibold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-[20px]">payments</span> Payment Method
+                </h2>
+<div class="space-y-3">
+<!-- UPI Option -->
+<label class="flex items-center justify-between glass-panel rounded-xl p-4 cursor-pointer relative overflow-hidden group">
+<div class="flex items-center gap-3 relative z-10">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<input checked="" class="hidden" name="payment" type="radio"/>
+<div>
+<p class="text-text-main dark:text-slate-100 text-sm font-medium">UPI / QR</p>
+<p class="text-text-muted text-xs">GPay, PhonePe, Paytm</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary opacity-20 text-4xl absolute -right-2 -bottom-2 group-hover:scale-110 transition-transform">qr_code_scanner</span>
+</label>
+<!-- Card Option -->
+<label class="flex items-center justify-between glass-panel rounded-xl p-4 cursor-pointer relative overflow-hidden group opacity-70 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-3 relative z-10">
+<div class="w-5 h-5 rounded-full border-2 border-text-muted flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<input class="hidden" name="payment" type="radio"/>
+<div>
+<p class="text-text-main dark:text-slate-100 text-sm font-medium">Credit / Debit Card</p>
+<p class="text-text-muted text-xs">Visa, Mastercard, RuPay</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted opacity-20 text-4xl absolute -right-2 -bottom-2 group-hover:scale-110 transition-transform">credit_card</span>
+</label>
+<!-- COD Option -->
+<label class="flex items-center justify-between glass-panel rounded-xl p-4 cursor-pointer relative overflow-hidden group opacity-70 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-3 relative z-10">
+<div class="w-5 h-5 rounded-full border-2 border-text-muted flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<input class="hidden" name="payment" type="radio"/>
+<div>
+<p class="text-text-main dark:text-slate-100 text-sm font-medium">Cash on Delivery</p>
+<p class="text-text-muted text-xs">Pay when you receive</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted opacity-20 text-4xl absolute -right-2 -bottom-2 group-hover:scale-110 transition-transform">local_shipping</span>
+</label>
+</div>
+</div>
+<!-- Trust Badges -->
+<div class="px-4 py-8 flex justify-center items-center gap-6 text-text-muted opacity-60">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+<span class="text-[10px] font-medium tracking-wide uppercase">Secure</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-text-muted"></div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+<span class="text-[10px] font-medium tracking-wide uppercase">Authentic</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-text-muted"></div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+<span class="text-[10px] font-medium tracking-wide uppercase">Encrypted</span>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface/95 dark:bg-surface-dark/95 backdrop-blur-lg border-t border-border-light dark:border-slate-800 p-4 pb-safe z-20 max-w-md mx-auto">
+<button class="w-full bg-primary hover:bg-primary-hover text-white rounded-xl py-4 px-6 font-semibold text-base flex justify-between items-center shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+<span>Pay Now</span>
+<span class="flex items-center gap-2">₹12,499 <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+</button>
+</div>
+</div>
+</body></html>

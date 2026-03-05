@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flower Category Collection - PHOOLVIAA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1313",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen antialiased">
+<div class="relative flex h-auto min-h-screen w-full max-w-md mx-auto flex-col group/design-root overflow-x-hidden shadow-xl border-x border-primary/20 dark:border-primary/10">
+<!-- Header -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 z-10 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md">
+<button class="flex size-12 shrink-0 items-center justify-center text-slate-900 dark:text-slate-100 rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Crochet Flowers</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex size-12 shrink-0 items-center justify-center text-slate-900 dark:text-slate-100 rounded-full hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</button>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="@container px-4 py-3">
+<div class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[218px] relative shadow-sm" data-alt="Soft pink crochet flowers arranged beautifully" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBl786fsqohmh3qfR2nbdHe4g2vGA7CLYL0IGTQJvkh0CJV_qWufdSWFzhzEvRJx0Qk8DMFsL9sIrxiYFXBo_dhipQrQTVgpEPoX327NyMxiOiHjV-RrgYWdZkjqNnyWRT_dbQRWSBdY1oavNllvkVeqgjOQKai2J9S9VCTKYZJ8Vb2fqE8o8dt6P8LSe7r3R920WqgcrJWggiA7ZwQvpSs5hH_ZBKVlr-GKQdAiUU07D6NWL9B9kxStbGAl__wszix-gvaQmgDjh77");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="relative flex p-6 z-10">
+<p class="text-white tracking-light text-[28px] font-bold leading-tight drop-shadow-md">Crochet Flowers</p>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex gap-3 px-4 py-3 overflow-x-auto no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/40 dark:bg-primary/20 px-4 hover:bg-primary/60 transition-colors border border-primary/50">
+<span class="text-sm font-medium leading-normal">All</span>
+<span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-light dark:bg-background-dark border border-primary/50 px-4 hover:bg-primary/20 transition-colors">
+<span class="text-sm font-medium leading-normal">Price</span>
+<span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-light dark:bg-background-dark border border-primary/50 px-4 hover:bg-primary/20 transition-colors">
+<span class="text-sm font-medium leading-normal">Type</span>
+<span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-light dark:bg-background-dark border border-primary/50 px-4 hover:bg-primary/20 transition-colors">
+<span class="text-sm font-medium leading-normal">Color</span>
+<span class="material-symbols-outlined text-[20px]">keyboard_arrow_down</span>
+</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-2 gap-4 p-4 mb-20">
+<!-- Product Card 1 -->
+<div class="flex flex-col gap-3 group relative">
+<div class="relative w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl shadow-sm overflow-hidden" data-alt="Blush peony crochet basket arrangement" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnr8jV3zmJn_uOMjLrenRrDh6F86j3sRkFtwcxEIpiCTNYs_bjnoEIITXANzENqKz7rLwwqPCVScnt_O7ZJTFkPKL3Zc5BWtKCxojzo3-XiGR77Nig7RZqZbW4_c3cpHJHxGNMjRhIhcXOhACGxToGP281YqCeZ24m7Q1bRD_bqjV1naFKvUBL9sNjdSFNlvPw92PBEmRzCd-KD6guiYUqh4Z2I7buIdMc9rutGDnMOY-egFiJnczhILnsmS617jQYV2zLqEfw58_s");'>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-slate-900 dark:text-white hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="absolute bottom-2 right-2 size-8 bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-md hover:bg-primary/80 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div>
+<p class="text-sm font-semibold leading-tight line-clamp-1">Blush Peony Basket</p>
+<div class="flex justify-between items-center mt-1">
+<p class="text-sm font-bold">$85.00</p>
+<span class="text-[10px] uppercase tracking-wider font-semibold bg-primary/40 dark:bg-primary/20 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full">Handmade</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="flex flex-col gap-3 group relative">
+<div class="relative w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl shadow-sm overflow-hidden" data-alt="Classic red rose crochet flower" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBb64hR0b2mRTCK35P8TP6QVSUczA6Uy93smolOJIc-tsp-3xbEaIXiqyd98tN3PGaBR4-fc9nHmJi4-wY1X0jN67K32586MJjtGvUMpDkpYq6ufIxh91FzOwLJR7CT-Q8EoZde9NNKcX9RDj0wTJ385BR2uZRDVArD0pC2eMGv1KO4Dto6iQGU-3SzvPsWdrTULX7nNqfdY8__vCYzGOyxywGYNr5-bNm1L-TcFIjySyvRua9wpg1qJJDkrhnrZrcr6dQKKBj49x_r");'>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-slate-900 dark:text-white hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="absolute bottom-2 right-2 size-8 bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-md hover:bg-primary/80 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div>
+<p class="text-sm font-semibold leading-tight line-clamp-1">Classic Red Rose</p>
+<div class="flex justify-between items-center mt-1">
+<p class="text-sm font-bold">$45.00</p>
+<span class="text-[10px] uppercase tracking-wider font-semibold bg-primary/40 dark:bg-primary/20 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full">Handmade</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="flex flex-col gap-3 group relative">
+<div class="relative w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl shadow-sm overflow-hidden" data-alt="Mini daisy bouquet crochet" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHqcHesjrSF0snZVfnmDCn7cGc6_jIypDvWX3Xwe32GHxgL_KF9cwkPwNQX3wQtG6ixvc1Tl1gjxr31JZp13YH5Nrlsq3ipcp0G2ENC0XPai00MYsdFP2q-Ab8mnPicl56BpHahGTMUp3hxZ5pfUKDCqj9cPM8riy2YuccjQqvbN9yVAmiHtKrdw7udAVHTaYJfW5FsXRO4nQZlZ2kyXqU8_4Sn5AODpnZ5cAqseIQInJbRlnTXr6GiUidWsbejXP-gMlD_hO3Mciq");'>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-slate-900 dark:text-white hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="absolute bottom-2 right-2 size-8 bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-md hover:bg-primary/80 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div>
+<p class="text-sm font-semibold leading-tight line-clamp-1">Mini Daisy Bouquet</p>
+<div class="flex justify-between items-center mt-1">
+<p class="text-sm font-bold">$60.00</p>
+<span class="text-[10px] uppercase tracking-wider font-semibold bg-primary/40 dark:bg-primary/20 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full">Handmade</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="flex flex-col gap-3 group relative">
+<div class="relative w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl shadow-sm overflow-hidden" data-alt="Lavender stem crochet flower" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAbipBZ40iaUE_E_Cj9JQLym0exkw1ummL-rPLRk34PRbwgdzTcn538tNMSRcUEvsc7w0HfZV_pffNhxTYmNrcgTtGPnTBY_pYrfMGvZoL3XbPvtt14Cd_SgyC2S_r79tkyKWFmN8FnSlUpIjWoTNKBUkp9a8xldtkWeB-405AT04cxRPGHyi5xGcezKan2deB8Cegq4-uCLYFKuFQ_VhTO7Gug7P_pNMe1yCMp6rVvlM3oPIM4wmlnaM8F1NklvJk-Zi5tIjYgG5Z6");'>
+<button class="absolute top-2 right-2 size-8 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-slate-900 dark:text-white hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<button class="absolute bottom-2 right-2 size-8 bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-md hover:bg-primary/80 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div>
+<p class="text-sm font-semibold leading-tight line-clamp-1">Lavender Stem</p>
+<div class="flex justify-between items-center mt-1">
+<p class="text-sm font-bold">$35.00</p>
+<span class="text-[10px] uppercase tracking-wider font-semibold bg-primary/40 dark:bg-primary/20 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full">Handmade</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 w-full max-w-md mx-auto flex gap-2 border-t border-primary/20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-safe pt-2 z-50">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors pb-2" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-900 dark:text-slate-100 pb-2 relative" href="#">
+<div class="absolute -top-3 bg-primary/20 size-12 rounded-full -z-10"></div>
+<span class="material-symbols-outlined text-[24px] font-variation-settings-'FILL'1">grid_view</span>
+<p class="text-[10px] font-bold leading-normal tracking-wide">Shop</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors pb-2" href="#">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Wishlist</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors pb-2 relative" href="#">
+<span class="absolute top-0 right-4 flex h-3 w-3 items-center justify-center rounded-full bg-red-500 text-[8px] text-white">2</span>
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<p class="text-[10px] font-medium leading-normal tracking-wide">Cart</p>
+</a>
+</div>
+<!-- Safe area padding for bottom nav -->
+<div class="h-safe w-full"></div>
+</div>
+</body></html>

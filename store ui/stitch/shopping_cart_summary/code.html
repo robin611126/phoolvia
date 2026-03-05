@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopping Cart Summary - PHOOLVIAA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1313",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased h-screen overflow-hidden flex flex-col justify-between">
+<div class="flex-1 overflow-y-auto w-full max-w-md mx-auto relative shadow-xl bg-white dark:bg-background-dark h-full flex flex-col">
+<!-- Header -->
+<header class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+<button class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-semibold leading-tight tracking-tight flex-1 text-center pr-12">Your Cart</h2>
+</header>
+<!-- Main Content Scrollable Area -->
+<main class="flex-1 overflow-y-auto">
+<!-- Free Shipping Progress -->
+<div class="flex flex-col gap-3 p-6 bg-white dark:bg-background-dark border-b border-slate-100 dark:border-slate-800">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-slate-800 dark:text-slate-200 text-sm font-medium leading-normal">
+                        Add <span class="font-bold text-slate-900 dark:text-white">$15.00</span> more to get <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Free Shipping!</span>
+</p>
+</div>
+<div class="rounded-full bg-slate-100 dark:bg-slate-800 h-2 w-full overflow-hidden">
+<div class="h-full rounded-full bg-slate-900 dark:bg-slate-100 transition-all duration-500 ease-out" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Cart Items -->
+<div class="flex flex-col py-2">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-background-dark px-6 py-4 justify-between group">
+<div class="flex items-start gap-4 flex-1">
+<div class="bg-slate-100 dark:bg-slate-800 bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-20 shrink-0 shadow-sm border border-slate-50 dark:border-slate-700" data-alt="Crochet Tote Bag Thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1SaxPUTy2knBNXxmPDPCX6WBw29pPuvblpaHpQd7m1qqf24xO7NgUzs0rzO5N9IqxOlbHoZHZ9wCVgQfKLYSscfW4ORkDcg1Z51ML-36FGeXk8MvVrUQBmH-6Ce_3gYCMU7j734-xBGfDG0Y0aYnEU86Bqs-WCBLdYy67rEACTX_uVZtfhjF5eRenvjn9qSgFnrMWC9405ghY74FlLf6DeF1IQ8GigSvjBLjhJeoeDndEPjY2BMgznhOGRZRUvnfr6KB7HN_cAfyC");'></div>
+<div class="flex flex-col justify-start h-full pt-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-tight line-clamp-2 mb-1">Classic Crochet Tote Bag</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">Natural White</p>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold mt-auto">$85.00</p>
+</div>
+</div>
+<div class="shrink-0 flex flex-col items-end gap-2">
+<button aria-label="Remove item" class="text-slate-400 hover:text-red-500 transition-colors p-1">
+<span class="material-symbols-outlined text-xl">delete_outline</span>
+</button>
+<div class="flex items-center gap-0 border border-slate-200 dark:border-slate-700 rounded-full bg-white dark:bg-slate-900 overflow-hidden">
+<button aria-label="Decrease quantity" class="text-slate-600 dark:text-slate-300 flex h-8 w-8 items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="text-slate-900 dark:text-slate-100 text-sm font-medium w-8 p-0 text-center bg-transparent border-none focus:ring-0" readonly="" type="number" value="1"/>
+<button aria-label="Increase quantity" class="text-slate-600 dark:text-slate-300 flex h-8 w-8 items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<div class="mx-6 h-px bg-slate-100 dark:bg-slate-800"></div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-background-dark px-6 py-4 justify-between group">
+<div class="flex items-start gap-4 flex-1">
+<div class="bg-slate-100 dark:bg-slate-800 bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-20 shrink-0 shadow-sm border border-slate-50 dark:border-slate-700" data-alt="Daisy Coasters Thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHmnyzSkoPOqsuYAb1_HYtcTpwHJM7ozBV3EHc9jvVeOLa3secfk2M5T9Wv4ptkywrP3AYthF0G4_OmO5XpxoQIzrOEJLnFu4mGo_AEfkzLjMITmSDEbWDuvoukofx08aMw0lmhkCwkNFP5gulOlViiqjUgjlRzp775AAbd9YXkBFofhQeydUIFx3LkvrXeeLyVuBitQiNGD5JvRd9U-KX7nP2AQpdTq6Q9LdTfSInNa0KZQKAI4Dx7djuVPOnrevnbdCeimAE1-wf");'></div>
+<div class="flex flex-col justify-start h-full pt-1">
+<p class="text-slate-900 dark:text-slate-100 text-base font-medium leading-tight line-clamp-2 mb-1">Handmade Daisy Coasters</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">Set of 4</p>
+<p class="text-slate-900 dark:text-slate-100 text-base font-semibold mt-auto">$24.00</p>
+</div>
+</div>
+<div class="shrink-0 flex flex-col items-end gap-2">
+<button aria-label="Remove item" class="text-slate-400 hover:text-red-500 transition-colors p-1">
+<span class="material-symbols-outlined text-xl">delete_outline</span>
+</button>
+<div class="flex items-center gap-0 border border-slate-200 dark:border-slate-700 rounded-full bg-white dark:bg-slate-900 overflow-hidden">
+<button aria-label="Decrease quantity" class="text-slate-600 dark:text-slate-300 flex h-8 w-8 items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="text-slate-900 dark:text-slate-100 text-sm font-medium w-8 p-0 text-center bg-transparent border-none focus:ring-0" readonly="" type="number" value="2"/>
+<button aria-label="Increase quantity" class="text-slate-600 dark:text-slate-300 flex h-8 w-8 items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Notes (Optional) -->
+<div class="px-6 py-4">
+<button class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+<span class="material-symbols-outlined text-lg">edit_note</span>
+<span>Add order note or gift message</span>
+</button>
+</div>
+<div class="h-24"></div> <!-- Spacer for scrolling past fixed bottom area -->
+</main>
+<!-- Checkout Summary (Fixed Bottom) -->
+<div class="bg-white dark:bg-background-dark border-t border-slate-100 dark:border-slate-800 pt-4 pb-6 px-6 z-20">
+<div class="space-y-3 mb-6">
+<div class="flex justify-between items-center text-slate-600 dark:text-slate-400 text-sm">
+<span>Subtotal</span>
+<span>$133.00</span>
+</div>
+<div class="flex justify-between items-center text-slate-600 dark:text-slate-400 text-sm">
+<span>Shipping</span>
+<span class="text-slate-400 dark:text-slate-500">Calculated at next step</span>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 my-2"></div>
+<div class="flex justify-between items-center text-slate-900 dark:text-slate-100 font-bold text-lg">
+<span>Total</span>
+<span>$133.00</span>
+</div>
+</div>
+<button class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold py-4 px-6 rounded-xl shadow-lg shadow-slate-900/10 hover:opacity-90 transition-opacity flex justify-center items-center gap-2">
+<span>Proceed to Checkout</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+<!-- Bottom Navigation -->
+<nav class="flex gap-2 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-background-dark px-4 pb-safe pt-2 z-20 pb-4">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">home</span>
+</div>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</div>
+<span class="text-[10px] font-medium">Search</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-900 dark:text-slate-100" href="#">
+<div class="flex h-8 items-center justify-center relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">shopping_bag</span>
+<span class="absolute -top-1 -right-2 bg-primary text-slate-900 text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">3</span>
+</div>
+<span class="text-[10px] font-medium">Cart</span>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

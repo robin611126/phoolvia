@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmation Success</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f8e7e7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#1f1313",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto overflow-x-hidden shadow-2xl bg-white dark:bg-slate-900">
+<!-- Top App Bar -->
+<div class="flex items-center p-4 justify-between border-b border-slate-100 dark:border-slate-800">
+<button class="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<h2 class="text-lg font-semibold text-center flex-1">Order Success</h2>
+<button class="flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">share</span>
+</button>
+</div>
+<!-- Success Animation Placeholder -->
+<div class="w-full flex justify-center pt-12 pb-8">
+<div class="w-48 h-48 bg-primary/20 dark:bg-primary/10 rounded-full flex items-center justify-center relative shadow-inner">
+<div class="w-36 h-36 bg-primary/40 dark:bg-primary/20 rounded-full flex items-center justify-center absolute"></div>
+<div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center z-10 shadow-lg">
+<span class="material-symbols-outlined text-5xl text-rose-800 dark:text-rose-200">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Success Message -->
+<div class="px-6 pb-8 text-center">
+<h1 class="font-serif text-[32px] font-bold leading-tight mb-3 text-slate-900 dark:text-slate-50">Your order is confirmed!</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base">Thank you for shopping with PHOOLVIAA.</p>
+</div>
+<!-- Order Details Card -->
+<div class="px-4 pb-8">
+<div class="flex items-stretch justify-between gap-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 p-5 shadow-sm border border-slate-100 dark:border-slate-700/50">
+<div class="flex flex-col gap-2 flex-[2_2_0px] justify-center">
+<p class="text-slate-900 dark:text-slate-100 text-lg font-semibold">Order #PHV-987654</p>
+<div class="flex items-center gap-1.5 text-rose-800 dark:text-rose-300">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+<p class="text-sm font-medium">Estimated Delivery: Oct 12 - Oct 15</p>
+</div>
+</div>
+<div class="w-20 h-20 bg-center bg-no-repeat bg-cover rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 shrink-0" data-alt="Handmade crochet flowers in premium packaging" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9gCDUDZYxbMYoAI7KG0cA3rkFJ5RoEhVp1H9kDmXcIPiCZEv5fQ3KNZ1y82dkQeKVymwgl8dumogwLo-cXZSwo64odSwFbL-z7X-LCP32L7XZw4WZrmvCwwzfO_ii1epoNxY_lO_4ajiesF2eLXgE6Vz52SYCK9MXrBBQUFIrICc8OJ9hA73TqtWxDMKL-vVDhLH3g8yMkFU58cDEq_uhLfgKuI4c_E6iZTeoX67hQ6rB0lZ8pwY8R87KoSYDh4ljCd2F2o_QX397");'></div>
+</div>
+</div>
+<!-- Actions -->
+<div class="px-4 pb-8 flex flex-col gap-4 mt-auto">
+<button class="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 h-14 rounded-full font-semibold text-lg hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors shadow-md">
+                Track Order
+            </button>
+<button class="w-full bg-primary/30 dark:bg-primary/10 text-rose-900 dark:text-rose-200 h-14 rounded-full font-semibold text-lg hover:bg-primary/50 dark:hover:bg-primary/20 transition-colors">
+                Continue Shopping
+            </button>
+</div>
+</div>
+</body></html>
