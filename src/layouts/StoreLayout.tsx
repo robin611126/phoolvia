@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link, NavLink } from 'react-router-dom';
 import { Home, Grid3X3, Heart, ShoppingBag, User } from 'lucide-react';
 
@@ -12,6 +13,18 @@ const tabs = [
 export default function StoreLayout() {
     const location = useLocation();
     const hideBottomNav = ['/checkout', '/order-success'].includes(location.pathname);
+    const [cartCount, setCartCount] = useState(0);
+
+    const updateCartCount = () => {
+        const cart = JSON.parse(localStorage.getItem('phoolviaa_cart') || '[]');
+        setCartCount(cart.reduce((sum: number, item: any) => sum + item.quantity, 0));
+    };
+
+    useEffect(() => {
+        updateCartCount();
+        window.addEventListener('cart-updated', updateCartCount);
+        return () => window.removeEventListener('cart-updated', updateCartCount);
+    }, []);
 
     return (
         <div className="min-h-screen bg-ivory font-body">
@@ -20,8 +33,13 @@ export default function StoreLayout() {
                 <div className="flex items-center justify-between px-4 py-3.5">
                     <div className="w-8" />
                     <h1 className="font-display text-xl tracking-[0.25em] text-charcoal">PHOOLVIAA</h1>
-                    <NavLink to="/cart" className="relative text-charcoal">
+                    <NavLink to="/cart" className="relative text-charcoal p-1">
                         <ShoppingBag size={22} />
+                        {cartCount > 0 && (
+                            <span className="absolute top-0 right-0 w-4 h-4 bg-blush-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                                {cartCount}
+                            </span>
+                        )}
                     </NavLink>
                 </div>
             </header>
@@ -72,7 +90,14 @@ export default function StoreLayout() {
                                     className={`flex flex-col items-center gap-0.5 px-3 py-1 ${isActive ? 'text-charcoal' : 'text-gray-400'
                                         }`}
                                 >
-                                    <tab.icon size={20} fill={isActive ? 'currentColor' : 'none'} />
+                                    <div className="relative">
+                                        <tab.icon size={20} fill={isActive ? 'currentColor' : 'none'} />
+                                        {tab.to === '/cart' && cartCount > 0 && (
+                                            <span className="absolute -top-1.5 -right-2 w-3.5 h-3.5 bg-blush-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full border border-white">
+                                                {cartCount}
+                                            </span>
+                                        )}
+                                    </div>
                                     <span className="text-[10px] font-medium">{tab.label}</span>
                                 </NavLink>
                             );

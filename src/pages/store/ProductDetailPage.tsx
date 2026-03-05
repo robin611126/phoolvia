@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
 import { Heart, Star, Minus, Plus, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react';
@@ -18,6 +18,22 @@ export default function ProductDetailPage() {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [activeImage, setActiveImage] = useState(0);
+    const scrollRef = useRef<HTMLDivElement>(null);
+
+    const handleScroll = () => {
+        if (!scrollRef.current) return;
+        const scrollPosition = scrollRef.current.scrollLeft;
+        const width = scrollRef.current.clientWidth;
+        const currentIndex = Math.round(scrollPosition / width);
+        setActiveImage(currentIndex);
+    };
+
+    const scrollToImage = (index: number) => {
+        if (!scrollRef.current) return;
+        const width = scrollRef.current.clientWidth;
+        scrollRef.current.scrollTo({ left: width * index, behavior: 'smooth' });
+        setActiveImage(index);
+    };
     const [expandedSection, setExpandedSection] = useState<string | null>('details');
 
     useEffect(() => { loadProduct(); }, [slug]);
@@ -69,18 +85,34 @@ export default function ProductDetailPage() {
         <div className="animate-fade-in">
             {/* Image Gallery */}
             <div className="relative">
-                <div className="aspect-square bg-blush-50 overflow-hidden">
+                <div
+                    ref={scrollRef}
+                    onScroll={handleScroll}
+                    className="aspect-square bg-blush-50 flex overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth"
+                >
                     {images.length > 0 ? (
-                        <img src={images[activeImage]?.url || images[activeImage]} alt={product.name} className="w-full h-full object-cover" />
+                        images.map((img: any, i: number) => (
+                            <img
+                                key={i}
+                                src={img?.url || img}
+                                alt={`${product.name} - ${i + 1}`}
+                                className="w-full h-full object-cover flex-shrink-0 snap-center"
+                            />
+                        ))
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-6xl">🌸</div>
+                        <div className="w-full h-full flex-shrink-0 flex items-center justify-center text-6xl">🌸</div>
                     )}
                 </div>
                 {/* Image dots */}
                 {images.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
                         {images.map((_: any, i: number) => (
-                            <button key={i} onClick={() => setActiveImage(i)} className={`w-2 h-2 rounded-full transition-colors ${i === activeImage ? 'bg-charcoal' : 'bg-white/70'}`} />
+                            <button
+                                key={i}
+                                onClick={() => scrollToImage(i)}
+                                className={`w-2 h-2 rounded-full transition-colors ${i === activeImage ? 'bg-charcoal' : 'bg-white/70 shadow-sm'}`}
+                                aria-label={`Go to image ${i + 1}`}
+                            />
                         ))}
                     </div>
                 )}
