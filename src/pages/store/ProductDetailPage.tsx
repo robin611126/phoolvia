@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
-import { Heart, Star, Minus, Plus, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react';
+import { Heart, Star, Minus, Plus, ShoppingBag, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface Product {
@@ -12,6 +12,7 @@ interface Product {
 
 export default function ProductDetailPage() {
     const { slug } = useParams();
+    const navigate = useNavigate();
     const [product, setProduct] = useState<Product | null>(null);
     const [related, setRelated] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -66,6 +67,25 @@ export default function ProductDetailPage() {
         localStorage.setItem('phoolviaa_cart', JSON.stringify(cart));
         window.dispatchEvent(new Event('cart-updated'));
         toast.success(`Added ${product.name} to cart`);
+    }
+
+    function buyNow() {
+        if (!product) return;
+        const img = product.images?.[0]?.url || product.images?.[0] || null;
+        const buyNowItem = [{
+            id: product.id,
+            name: product.name,
+            slug: product.slug,
+            price: product.price,
+            image: img,
+            color: selectedColor,
+            size: selectedSize,
+            quantity,
+            variant: [selectedColor, selectedSize].filter(Boolean).join(' / '),
+        }];
+        // Save to a separate key – does NOT affect the cart
+        localStorage.setItem('phoolviaa_buy_now', JSON.stringify(buyNowItem));
+        navigate('/checkout');
     }
 
     if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blush-400" /></div>;
@@ -170,13 +190,27 @@ export default function ProductDetailPage() {
                     </div>
                 </div>
 
-                {/* Add to Cart */}
-                <div className="flex gap-3 pt-2">
-                    <button onClick={addToCart} disabled={isOutOfStock} className="flex-1 btn-primary flex items-center justify-center gap-2 disabled:opacity-50">
-                        <ShoppingBag size={18} />
+                {/* Add to Cart / Buy Now */}
+                <div className="flex flex-col gap-2.5 pt-2">
+                    {/* Buy Now - Primary CTA */}
+                    <button
+                        onClick={buyNow}
+                        disabled={isOutOfStock}
+                        className="w-full py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-2 disabled:opacity-50 transition-all active:scale-[0.98] text-white"
+                        style={{ background: 'linear-gradient(135deg, #f472b6, #ec4899, #db2777)' }}
+                    >
+                        <Zap size={18} fill="currentColor" />
+                        {isOutOfStock ? 'Out of Stock' : 'Buy Now'}
+                    </button>
+                    {/* Add to Cart - Secondary */}
+                    <button
+                        onClick={addToCart}
+                        disabled={isOutOfStock}
+                        className="w-full py-3.5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 border-2 border-charcoal text-charcoal bg-white hover:bg-gray-50 transition-colors active:scale-[0.98]"
+                    >
+                        <ShoppingBag size={17} />
                         {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                     </button>
-                    <Link to="/cart" className="btn-accent flex items-center justify-center w-auto">Buy Now</Link>
                 </div>
 
                 {/* Accordions */}
