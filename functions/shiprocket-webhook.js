@@ -18,7 +18,6 @@ module.exports = async function (req) {
             const anonKey = Deno.env.get('ANON_KEY') || '';
 
             // Map shiprocket payload to our orders table
-            // We use gen_random_uuid() for id, and map mapped fields appropriately
             const order_number = `SR-${body.order_id || Date.now()}`;
 
             const newOrder = {
@@ -51,12 +50,34 @@ module.exports = async function (req) {
                 const errResult = await res.text();
                 throw new Error(`DB Insert Error: ${errResult}`);
             }
+        } else if (body.current_status === 'CANCELED' || body.status === 'CANCELED' || body.status_code === 15) {
+            // Handle Shiprocket Cancellations (Status code 15 is standard SR Cancelled)
+            const baseUrl = Deno.env.get('INSFORGE_BASE_URL') || '';
+            const anonKey = Deno.env.get('ANON_KEY') || '';
+            const shiprocketOrderId = body.order_id || body.awb; // Depending on payload structure
 
-            // Optionally, we could invoke the send-email edge function here
-            // fetch(`${baseUrl}/functions/v1/send-email`, { ... })
+            if (shiprocketOrderId) {
+                const res = await fetch(`${baseUrl}/rest/v1/orders?shiprocket_order_id=eq.${shiprocketOrderId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'apikey': anonKey,
+                        'Authorization': `Bearer ${anonKey}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        order_status: 'cancelled',
+                        admin_notes: `Order cancelled on Shiprocket at ${new Date().toLocaleString()}`,
+                    })
+                });
+
+                if (!res.ok) {
+                    throw new Error(`DB Update Error: ${await res.text()}`);
+                }
+            }
         }
 
-        return new Response(JSON.stringify({ success: true, received: true }), {
+        return new Response(JSON.stringify({ success: true, received: true, status: body.current_status || body.status }), {
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
             status: 200
         });
