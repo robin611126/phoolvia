@@ -8,13 +8,15 @@ const tabs = [
     { to: '/shop', icon: Grid3X3, label: 'Shop' },
     { to: '/wishlist', icon: Heart, label: 'Wishlist' },
     { to: '/cart', icon: ShoppingBag, label: 'Cart' },
-    // Profile is handled dynamically during render
-    { to: '/profile', icon: User, label: 'Profile' }
+    { to: '/profile', icon: User, label: 'Profile' },
 ];
+
+// Pages where bottom nav should be hidden
+const HIDE_NAV_PATHS = ['/checkout', '/order-success'];
 
 export default function StoreLayout() {
     const location = useLocation();
-    const hideBottomNav = ['/checkout', '/order-success'].includes(location.pathname);
+    const hideBottomNav = HIDE_NAV_PATHS.includes(location.pathname);
     const [cartCount, setCartCount] = useState(0);
     const { user } = useAuth();
 
@@ -29,17 +31,23 @@ export default function StoreLayout() {
         return () => window.removeEventListener('cart-updated', updateCartCount);
     }, []);
 
+    const isTabActive = (to: string) => {
+        if (to === '/') return location.pathname === '/';
+        // Exact match for top-level tabs, prefix match for nested routes
+        return location.pathname === to || location.pathname.startsWith(to + '/');
+    };
+
     return (
         <div className="min-h-screen bg-ivory font-body">
             {/* Top Header */}
-            <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100">
+            <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
                 <div className="flex items-center justify-between px-4 py-3.5">
                     <div className="w-8" />
-                    <h1 className="font-display text-xl tracking-[0.25em] text-charcoal">PHOOLVIAA</h1>
+                    <Link to="/" className="font-display text-xl tracking-[0.25em] text-charcoal">PHOOLVIAA</Link>
                     <NavLink to="/cart" className="relative text-charcoal p-1">
                         <ShoppingBag size={22} />
                         {cartCount > 0 && (
-                            <span className="absolute top-0 right-0 w-4 h-4 bg-blush-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
+                            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-blush-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">
                                 {cartCount}
                             </span>
                         )}
@@ -47,13 +55,13 @@ export default function StoreLayout() {
                 </div>
             </header>
 
-            {/* Page Content */}
-            <main className={hideBottomNav ? '' : 'pb-20'}>
+            {/* Page Content — adds bottom padding only when nav is visible */}
+            <main className={hideBottomNav ? '' : 'pb-24'}>
                 <Outlet />
             </main>
 
-            {/* Footer with Legal Links */}
-            <footer className={`bg-gray-50 border-t border-gray-100 ${hideBottomNav ? '' : 'mb-16'} pt-12 pb-8 px-6 mt-12`}>
+            {/* Footer */}
+            <footer className={`bg-gray-50 border-t border-gray-100 ${hideBottomNav ? '' : 'mb-20'} pt-12 pb-8 px-6 mt-12`}>
                 <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h4 className="font-display font-semibold mb-3 text-charcoal">Phoolvia</h4>
@@ -68,10 +76,10 @@ export default function StoreLayout() {
                     <div>
                         <h4 className="font-display font-semibold mb-3 text-charcoal">Legal Policies</h4>
                         <ul className="space-y-2 text-sm text-gray-500">
-                            <li><Link to="/terms" className="hover:text-blush-600 transition-colors">Terms & Conditions</Link></li>
+                            <li><Link to="/terms" className="hover:text-blush-600 transition-colors">Terms &amp; Conditions</Link></li>
                             <li><Link to="/privacy" className="hover:text-blush-600 transition-colors">Privacy Policy</Link></li>
                             <li><Link to="/shipping-policy" className="hover:text-blush-600 transition-colors">Shipping Policy</Link></li>
-                            <li><Link to="/refund-policy" className="hover:text-blush-600 transition-colors">Refund & Cancellation Policy</Link></li>
+                            <li><Link to="/refund-policy" className="hover:text-blush-600 transition-colors">Refund &amp; Cancellation Policy</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -80,33 +88,41 @@ export default function StoreLayout() {
                 </div>
             </footer>
 
-            {/* Bottom Tab Bar */}
+            {/* Bottom Tab Bar — only shown on store pages (not checkout/order-success) */}
             {!hideBottomNav && (
-                <nav className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-100 safe-area-bottom">
+                <nav
+                    className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100"
+                    style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+                >
                     <div className="flex items-center justify-around py-2">
                         {tabs.map((tab) => {
-                            let targetTo = tab.to;
-                            if (tab.to === '/profile' && !user) {
-                                targetTo = '/login';
-                            }
+                            const targetTo = tab.to === '/profile' && !user ? '/login' : tab.to;
+                            const active = isTabActive(tab.to);
 
-                            const isActive = targetTo === '/' ? location.pathname === '/' : location.pathname.startsWith(targetTo);
                             return (
                                 <NavLink
                                     key={tab.to}
                                     to={targetTo}
-                                    className={`flex flex-col items-center gap-0.5 px-3 py-1 ${isActive ? 'text-charcoal' : 'text-gray-400'
-                                        }`}
+                                    className={`flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors
+                                        ${active ? 'text-charcoal' : 'text-gray-400'}`}
                                 >
                                     <div className="relative">
-                                        <tab.icon size={20} fill={isActive ? 'currentColor' : 'none'} />
+                                        <tab.icon
+                                            size={22}
+                                            fill={active ? 'currentColor' : 'none'}
+                                            strokeWidth={active ? 2 : 1.8}
+                                        />
                                         {tab.to === '/cart' && cartCount > 0 && (
-                                            <span className="absolute -top-1.5 -right-2 w-3.5 h-3.5 bg-blush-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full border border-white">
-                                                {cartCount}
+                                            <span className="absolute -top-2 -right-2.5 min-w-[16px] h-4 px-0.5 bg-blush-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full border border-white">
+                                                {cartCount > 9 ? '9+' : cartCount}
                                             </span>
                                         )}
                                     </div>
-                                    <span className="text-[10px] font-medium">{tab.label}</span>
+                                    <span className={`text-[10px] font-medium leading-none ${active ? 'text-charcoal' : 'text-gray-400'}`}>
+                                        {tab.label}
+                                    </span>
+                                    {/* Active indicator dot */}
+                                    {active && <div className="w-1 h-1 bg-blush-400 rounded-full mt-0.5" />}
                                 </NavLink>
                             );
                         })}

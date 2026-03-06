@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { insforge } from '../../lib/insforge';
 import { ArrowLeft, Upload, X, MoreVertical } from 'lucide-react';
+import ImageCropper from '../../components/ImageCropper';
+import toast from 'react-hot-toast';
 
 interface ProductForm {
     name: string;
@@ -71,24 +73,39 @@ export default function ProductEditPage() {
         return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     }
 
-    async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-        const files = e.target.files;
-        if (!files) return;
+    const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+
+    async function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+        const file = e.target.files?.[0]; // Process one per crop session
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.addEventListener('load', () => setCropImageSrc(reader.result?.toString() || null));
+        reader.readAsDataURL(file);
+
+        e.target.value = ''; // Reset input
+    }
+
+    async function handleCroppedImageUpload(croppedFile: File) {
+        setCropImageSrc(null); // Close modal
         setUploading(true);
+
         const newImages = [...form.images];
-        for (const file of Array.from(files)) {
-            const { data, error } = await insforge.storage.from('product-images').uploadAuto(file);
-            if (data && !error) {
-                newImages.push({ url: data.url, key: data.key, isMain: newImages.length === 0 });
-            }
+        const { data, error } = await insforge.storage.from('product-images').uploadAuto(croppedFile);
+
+        if (data && !error) {
+            newImages.push({ url: data.url, key: data.key, isMain: newImages.length === 0 });
+        } else if (error) {
+            toast.error('Failed to upload image');
         }
+
         setForm({ ...form, images: newImages });
         setUploading(false);
     }
 
     function removeImage(index: number) {
         const newImages = form.images.filter((_, i) => i !== index);
-        if (newImages.length > 0 && !newImages.some(img => img.isMain)) {
+        if (newImages.length > 0 && !newImages.some((img: any) => img.isMain)) {
             newImages[0].isMain = true;
         }
         setForm({ ...form, images: newImages });
@@ -131,6 +148,15 @@ export default function ProductEditPage() {
 
     return (
         <div className="animate-fade-in max-w-2xl">
+            {cropImageSrc && (
+                <ImageCropper
+                    imageSrc={cropImageSrc}
+                    onCropDone={handleCroppedImageUpload}
+                    onCancel={() => setCropImageSrc(null)}
+                    aspectRatio={4 / 5}
+                />
+            )}
+
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
@@ -186,8 +212,8 @@ export default function ProductEditPage() {
                     <label className="block border-2 border-dashed border-gray-200 rounded-xl p-8 text-center cursor-pointer hover:border-admin-primary/50 transition-colors">
                         <Upload className="mx-auto text-gray-300 mb-2" size={32} />
                         <p className="text-sm text-gray-600 font-medium">Tap to upload photos</p>
-                        <p className="text-xs text-gray-400 mt-1">JPG, PNG, WEBP up to 5MB</p>
-                        <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="hidden" />
+                        <p className="text-xs text-gray-400 mt-1">Select one photo at a time to crop</p>
+                        <input type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
                     </label>
 
                     {uploading && (
@@ -217,7 +243,7 @@ export default function ProductEditPage() {
                             {form.images.length < 8 && (
                                 <label className="w-24 h-24 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center cursor-pointer hover:border-admin-primary/50 flex-shrink-0">
                                     <Upload size={20} className="text-gray-300" />
-                                    <input type="file" multiple accept="image/*" onChange={handleImageUpload} className="hidden" />
+                                    <input type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
                                 </label>
                             )}
                         </div>

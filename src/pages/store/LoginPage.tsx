@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, LogIn, Chrome } from 'lucide-react';
-import { insforge } from '../../lib/insforge';
+import { Mail, Lock, LogIn } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function LoginPage() {
@@ -16,27 +15,13 @@ export default function LoginPage() {
         e.preventDefault();
         setLoading(true);
         setError(null);
-
         try {
             const { error: authError } = await login(email, password);
-
             if (authError) throw new Error(authError);
-
             navigate('/profile');
         } catch (err: any) {
             setError(err.message || 'Failed to login');
             setLoading(false);
-        }
-    }
-
-    async function handleGoogleLogin() {
-        try {
-            const { error } = await insforge.auth.signInWithOAuth({
-                provider: 'google',
-            });
-            if (error) throw error;
-        } catch (err: any) {
-            setError('Google login is not fully configured yet in Insforge dashboard.');
         }
     }
 
@@ -54,31 +39,12 @@ export default function LoginPage() {
                     </div>
                 )}
 
-                <button
-                    onClick={handleGoogleLogin}
-                    className="w-full mb-6 py-3.5 bg-white border border-gray-200 text-gray-700 rounded-xl font-medium flex items-center justify-center gap-3 hover:bg-gray-50 transition-colors shadow-sm"
-                >
-                    <Chrome size={20} className="text-blue-500" />
-                    Continue with Google
-                </button>
-
-                <div className="relative mb-6">
-                    <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-200"></div>
-                    </div>
-                    <div className="relative flex justify-center text-sm">
-                        <span className="px-4 bg-white text-gray-400">or sign in with email</span>
-                    </div>
-                </div>
-
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                         <div className="relative">
                             <input
-                                type="email"
-                                required
-                                value={email}
+                                type="email" required value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blush-400/30 focus:border-blush-400 transition-colors"
                                 placeholder="you@example.com"
@@ -94,9 +60,7 @@ export default function LoginPage() {
                         </div>
                         <div className="relative">
                             <input
-                                type="password"
-                                required
-                                value={password}
+                                type="password" required value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blush-400/30 focus:border-blush-400 transition-colors"
                                 placeholder="••••••••"
@@ -106,8 +70,7 @@ export default function LoginPage() {
                     </div>
 
                     <button
-                        type="submit"
-                        disabled={loading}
+                        type="submit" disabled={loading}
                         className="w-full mt-2 py-3.5 bg-charcoal text-white rounded-xl font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-gray-200"
                     >
                         {loading ? <div className="w-5 h-5 border-2 border-white/60 border-t-white rounded-full animate-spin" /> : <><LogIn size={18} /> Sign In</>}

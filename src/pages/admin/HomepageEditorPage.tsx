@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { insforge } from '../../lib/insforge';
 import { GripVertical, Eye, EyeOff, Edit2, Plus } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ImageCropper from '../../components/ImageCropper';
 
 interface Section {
     id: string;
@@ -54,14 +55,27 @@ export default function HomepageEditorPage() {
         setEditCtaLink(section.content?.cta_link || '');
     }
 
-    async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+
+    async function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
         if (!file) return;
+
+        // Read file as data URL for the cropper
+        const reader = new FileReader();
+        reader.addEventListener('load', () => setCropImageSrc(reader.result?.toString() || null));
+        reader.readAsDataURL(file);
+
+        // Clear input so selecting the same file again works
+        e.target.value = '';
+    }
+
+    async function handleCroppedImageUpload(croppedFile: File) {
+        setCropImageSrc(null); // Close cropper
         setUploadingImage(true);
         try {
-            const ext = file.name.substring(file.name.lastIndexOf('.'));
-            const filename = `homepage/${Date.now()}${ext}`;
-            const { data, error } = await insforge.storage.from('media-library').upload(filename, file);
+            const filename = `homepage/${Date.now()}.jpg`;
+            const { data, error } = await insforge.storage.from('media-library').upload(filename, croppedFile);
             if (error) throw error;
             if (data) setEditImageUrl(data.url);
         } catch (err: any) {
@@ -105,6 +119,15 @@ export default function HomepageEditorPage() {
 
     return (
         <div className="animate-fade-in space-y-4">
+            {cropImageSrc && (
+                <ImageCropper
+                    imageSrc={cropImageSrc}
+                    onCropDone={handleCroppedImageUpload}
+                    onCancel={() => setCropImageSrc(null)}
+                    aspectRatio={editSection?.section_type === 'hero_banner' ? 21 / 9 : 1 / 1}
+                />
+            )}
+
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-gray-900">Homepage Editor</h2>
                 <a href="/" target="_blank" className="text-sm text-admin-primary hover:underline">Preview →</a>
@@ -150,7 +173,7 @@ export default function HomepageEditorPage() {
                                         )}
                                         <label className="text-xs px-3 py-1.5 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-lg cursor-pointer transition-colors">
                                             {uploadingImage ? 'Uploading...' : 'Upload Image'}
-                                            <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} className="hidden" />
+                                            <input type="file" accept="image/*" onChange={handleFileSelect} disabled={uploadingImage} className="hidden" />
                                         </label>
                                         {editImageUrl && (
                                             <button onClick={() => setEditImageUrl('')} className="text-xs text-red-500 hover:underline">Remove</button>

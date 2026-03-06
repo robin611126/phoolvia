@@ -97,9 +97,9 @@ export default function ProductDetailPage() {
     const getImg = (p: any) => p.images?.[0]?.url || p.images?.[0] || null;
 
     const accordions = [
-        { key: 'details', title: 'Product Details', content: product.description || 'No description available.' },
-        { key: 'care', title: 'Care Instructions', content: 'Gently dust with a soft brush. Avoid exposure to direct sunlight and moisture. Keep away from heat sources.' },
-        { key: 'shipping', title: 'Shipping & Returns', content: 'Free shipping on orders above ₹500. Standard delivery in 3-5 business days. Returns accepted within 7 days.' },
+        { key: 'details', title: '🌸 Product Details', content: product.description || 'No description available.' },
+        { key: 'care', title: '✨ Care Instructions', content: 'Gently dust with a soft brush. Avoid exposure to direct sunlight and moisture. Keep away from heat sources.' },
+        { key: 'shipping', title: '📦 Shipping & Returns', content: 'Free shipping on orders above ₹500. Standard delivery in 3-5 business days. Returns accepted within 7 days.' },
     ];
 
     return (
@@ -221,7 +221,7 @@ export default function ProductDetailPage() {
                                 <span className="text-sm font-medium text-gray-900">{acc.title}</span>
                                 {expandedSection === acc.key ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
                             </button>
-                            {expandedSection === acc.key && <p className="text-sm text-gray-600 pb-4 leading-relaxed">{acc.content}</p>}
+                            {expandedSection === acc.key && <p className="text-sm text-gray-600 pb-4 leading-relaxed whitespace-pre-line">{acc.content}</p>}
                         </div>
                     ))}
                 </div>
