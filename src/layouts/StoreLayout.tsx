@@ -53,16 +53,15 @@ export default function StoreLayout() {
         <div className="min-h-screen bg-ivory font-body">
             {/* Top Header */}
             <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-                <div className="flex items-center justify-between px-4 py-3.5">
-                    <div className="w-8" />
-                    <Link to="/" className="flex flex-col items-center">
+                <div className="flex items-center justify-between md:justify-center px-4 py-3.5 relative">
+                    <Link to="/" className="flex flex-col items-start md:items-center">
                         {storeInfo.logo ? (
                             <img src={storeInfo.logo} alt={storeInfo.name} className="h-10 w-auto object-contain" />
                         ) : (
                             <span className="font-display text-xl tracking-[0.25em] text-charcoal uppercase">{storeInfo.name}</span>
                         )}
                     </Link>
-                    <NavLink to="/cart" className="relative text-charcoal p-1">
+                    <NavLink to="/cart" className="relative text-charcoal p-1 md:absolute md:right-4">
                         <ShoppingBag size={22} />
                         {cartCount > 0 && (
                             <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-blush-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white">

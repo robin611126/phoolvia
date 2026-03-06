@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck } from 'lucide-react';
+import { insforge } from '../../lib/insforge';
 
 interface CartItem { id: string; name: string; slug: string; price: number; image: string | null; color: string; size: string; quantity: number; variant: string; }
 
@@ -9,7 +10,20 @@ export default function CartPage() {
     const [items, setItems] = useState<CartItem[]>([]);
     const [note, setNote] = useState('');
 
-    useEffect(() => { loadCart(); window.addEventListener('cart-updated', loadCart); return () => window.removeEventListener('cart-updated', loadCart); }, []);
+    const [storeSettings, setStoreSettings] = useState<any>(null);
+
+    useEffect(() => {
+        loadCart();
+        window.addEventListener('cart-updated', loadCart);
+
+        async function fetchSettings() {
+            const { data } = await insforge.database.from('store_settings').select('*').limit(1).maybeSingle();
+            if (data) setStoreSettings(data);
+        }
+        fetchSettings();
+
+        return () => window.removeEventListener('cart-updated', loadCart);
+    }, []);
 
     function loadCart() { setItems(JSON.parse(localStorage.getItem('phoolviaa_cart') || '[]')); }
     function saveCart(cart: CartItem[]) { localStorage.setItem('phoolviaa_cart', JSON.stringify(cart)); setItems(cart); window.dispatchEvent(new Event('cart-updated')); }
@@ -17,8 +31,10 @@ export default function CartPage() {
     function removeItem(idx: number) { saveCart(items.filter((_, i) => i !== idx)); }
 
     const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const shippingThreshold = 500;
-    const shippingFee = subtotal >= shippingThreshold ? 0 : 50;
+    const shippingThreshold = storeSettings?.free_shipping_threshold != null ? parseFloat(storeSettings.free_shipping_threshold) : 500;
+    const shippingRate = storeSettings?.flat_shipping_rate != null ? parseFloat(storeSettings.flat_shipping_rate) : 50;
+
+    const shippingFee = subtotal >= shippingThreshold ? 0 : shippingRate;
     const total = subtotal + shippingFee;
     const freeShippingProgress = Math.min(100, (subtotal / shippingThreshold) * 100);
     const freeShippingRemaining = Math.max(0, shippingThreshold - subtotal);

@@ -143,8 +143,25 @@ export default function CheckoutPage() {
         setErrors(prev => ({ ...prev, [field]: validate(field, e.target.value) }));
     };
 
+    // Calculate shipping based on settings
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
-    const shippingFee = subtotal >= 500 ? 0 : 50;
+    const [storeSettings, setStoreSettings] = useState<any>(null);
+
+    useEffect(() => {
+        async function fetchSettings() {
+            const { data } = await insforge.database.from('store_settings').select('*').limit(1).maybeSingle();
+            if (data) setStoreSettings(data);
+        }
+        fetchSettings();
+    }, []);
+
+    // Use fetched settings or fallback to defaults
+    const threshold = storeSettings?.free_shipping_threshold != null ? parseFloat(storeSettings.free_shipping_threshold) : 500;
+    const rate = storeSettings?.flat_shipping_rate != null ? parseFloat(storeSettings.flat_shipping_rate) : 50;
+
+    // Check if subtotal is eligible for free shipping
+    const isEligibleForFreeShipping = subtotal >= threshold;
+    const shippingFee = isEligibleForFreeShipping ? 0 : rate;
     const total = subtotal + shippingFee;
 
     const loadRazorpayScript = () => new Promise((resolve) => {
@@ -267,11 +284,24 @@ export default function CheckoutPage() {
         handlePaymentAndOrder(orderNumber, orderData);
     }
 
-    const paymentMethods = [
-        { key: 'upi', label: 'UPI', desc: 'GPay, PhonePe, Paytm', emoji: '📱' },
-        { key: 'card', label: 'Credit / Debit Card', desc: 'Visa, Mastercard, RuPay', emoji: '💳' },
-        { key: 'cod', label: 'Cash on Delivery', desc: 'Pay when your order arrives', emoji: '💵' },
+    // Filter payment methods based on admin settings
+    const allPaymentMethods = [
+        { key: 'upi', label: 'UPI', desc: 'GPay, PhonePe, Paytm', emoji: '📱', enabled: storeSettings?.upi_enabled ?? true },
+        { key: 'card', label: 'Credit / Debit Card', desc: 'Visa, Mastercard, RuPay', emoji: '💳', enabled: storeSettings?.online_payment_enabled ?? false },
+        { key: 'cod', label: 'Cash on Delivery', desc: 'Pay when your order arrives', emoji: '💵', enabled: storeSettings?.cod_enabled ?? true },
     ];
+
+    const paymentMethods = allPaymentMethods.filter(m => m.enabled);
+
+    // Automatically select first available method if current selection becomes disabled
+    useEffect(() => {
+        if (storeSettings && paymentMethods.length > 0) {
+            const currentIsValid = paymentMethods.some(m => m.key === form.payment);
+            if (!currentIsValid) {
+                setForm(prev => ({ ...prev, payment: paymentMethods[0].key }));
+            }
+        }
+    }, [storeSettings]);
 
     const completedFields = ['name', 'email', 'phone', 'house', 'street', 'city', 'state', 'pin']
         .filter(f => (form as any)[f] && !errors[f]).length;
