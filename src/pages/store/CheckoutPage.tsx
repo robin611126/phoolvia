@@ -19,6 +19,11 @@ export default function CheckoutPage() {
         const cart = JSON.parse(localStorage.getItem('phoolviaa_cart') || '[]');
         if (cart.length === 0) navigate('/cart');
         setItems(cart);
+
+        // Meta Pixel: Initiate Checkout
+        if (typeof (window as any).fbq === 'function') {
+            (window as any).fbq('track', 'InitiateCheckout');
+        }
     }, []);
 
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
@@ -57,7 +62,7 @@ export default function CheckoutPage() {
 
         try {
             const { data, error } = await insforge.functions.invoke('create-razorpay-order', {
-                body: { amount: total, receipt: orderNumber }
+                body: { cart_items: items, receipt: orderNumber }
             });
 
             if (error || !data || !data.orderId) {
@@ -148,6 +153,11 @@ export default function CheckoutPage() {
                 console.error("Failed to trigger email function", err);
             }
 
+            // Meta Pixel: Purchase
+            if (typeof (window as any).fbq === 'function') {
+                (window as any).fbq('track', 'Purchase', { value: total, currency: 'INR' });
+            }
+
             navigate('/order-success', { state: { orderNumber: orderData.order_number, total, name: form.name } });
         }
         setLoading(false);
@@ -156,6 +166,11 @@ export default function CheckoutPage() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
+
+        // Meta Pixel: Add Payment Info
+        if (typeof (window as any).fbq === 'function') {
+            (window as any).fbq('track', 'AddPaymentInfo');
+        }
 
         // Generate order number
         const orderNumber = 'PHV-' + Date.now().toString(36).toUpperCase();
@@ -207,7 +222,7 @@ export default function CheckoutPage() {
                     <h3 className="text-sm font-semibold text-gray-900 mb-3">Contact Information</h3>
                     <div className="space-y-3">
                         <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email address" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
-                        <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone number" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
+                        <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, '') })} placeholder="Phone number (10 digits)" pattern="[0-9]{10}" title="Please enter a valid 10-digit Indian phone number" maxLength={10} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
                     </div>
                 </section>
 
@@ -221,7 +236,7 @@ export default function CheckoutPage() {
                             <input type="text" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="City" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
                             <input type="text" value={form.state} onChange={(e) => setForm({ ...form, state: e.target.value })} placeholder="State" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
                         </div>
-                        <input type="text" value={form.pin} onChange={(e) => setForm({ ...form, pin: e.target.value })} placeholder="PIN Code" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
+                        <input type="text" value={form.pin} onChange={(e) => setForm({ ...form, pin: e.target.value.replace(/\D/g, '') })} placeholder="PIN Code (6 digits)" pattern="[0-9]{6}" title="Please enter a valid 6-digit Indian PIN code" maxLength={6} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm" required />
                     </div>
                 </section>
 

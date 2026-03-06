@@ -112,8 +112,18 @@ export default function ProfilePage() {
                                                 <p className="text-[10px] text-gray-400 uppercase">{order.payment_method}</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-2 text-sm text-blush-600 font-medium">
-                                            <button className="hover:text-blush-700">View Details →</button>
+                                        <div className="flex items-center gap-4 text-sm font-medium">
+                                            <button className="text-blush-600 hover:text-blush-700">View Details →</button>
+                                            {(order.order_status === 'shipped' || order.order_status === 'delivered') && order.tracking_link && (
+                                                <a
+                                                    href={order.tracking_link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                                                >
+                                                    📦 Track {order.courier_name ? `via ${order.courier_name}` : 'Order'}
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
