@@ -95,10 +95,21 @@ export default function SettingsPage() {
                             ) : (
                                 <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center"><Store size={20} className="text-gray-300" /></div>
                             )}
-                            <label className="text-sm text-admin-primary font-medium cursor-pointer hover:underline">
-                                Upload Logo
-                                <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
-                            </label>
+                            <div className="flex flex-col gap-1">
+                                <label className="text-sm text-admin-primary font-medium cursor-pointer hover:underline">
+                                    Upload Logo
+                                    <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
+                                </label>
+                                {form.logo_url && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setForm({ ...form, logo_url: '' })}
+                                        className="text-sm text-red-500 hover:underline text-left cursor-pointer"
+                                    >
+                                        Remove Logo
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </section>

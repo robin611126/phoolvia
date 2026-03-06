@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { insforge } from '../../lib/insforge';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, Store } from 'lucide-react';
 
 export default function LoginPage() {
@@ -9,8 +10,19 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [storeInfo, setStoreInfo] = useState({ name: 'PHOOLVIAA', logo: null as string | null });
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchStoreInfo() {
+            const { data } = await insforge.database.from('store_settings').select('store_name, logo_url').limit(1);
+            if (data && data[0]) {
+                setStoreInfo({ name: data[0].store_name || 'PHOOLVIAA', logo: data[0].logo_url });
+            }
+        }
+        fetchStoreInfo();
+    }, []);
 
     // Redirect if already authenticated
     if (isAuthenticated) {
@@ -34,12 +46,19 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-blush-50 via-white to-blush-50 flex flex-col items-center justify-center p-4 font-body">
             {/* Logo */}
-            <div className="text-center mb-8 animate-fade-in">
-                <div className="w-20 h-20 bg-blush-100 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-                    <Store className="text-blush-500" size={36} />
-                </div>
-                <h1 className="text-2xl font-bold tracking-wider text-gray-900">PHOOLVIAA</h1>
-                <p className="text-sm text-gray-500 uppercase tracking-[0.3em] mt-1">Admin Portal</p>
+            <div className="text-center mb-8 animate-fade-in flex flex-col items-center">
+                {storeInfo.logo ? (
+                    <img src={storeInfo.logo} alt={storeInfo.name} className="h-20 w-auto object-contain mx-auto mb-4" />
+                ) : (
+                    <>
+                        <div className="w-20 h-20 bg-blush-100 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+                            <Store className="text-blush-500" size={36} />
+                        </div>
+                        <h1 className="text-2xl font-bold tracking-wider text-gray-900 uppercase">{storeInfo.name}</h1>
+                    </>
+                )}
+                {storeInfo.logo && <h1 className="text-2xl font-bold tracking-wider text-gray-900 uppercase mt-2 hidden">{storeInfo.name}</h1>}
+                <p className="text-sm text-gray-500 uppercase tracking-[0.3em] mt-1 font-semibold">Admin Portal</p>
             </div>
 
             {/* Login Card */}

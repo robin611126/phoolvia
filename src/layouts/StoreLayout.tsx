@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link, NavLink } from 'react-router-dom';
 import { Home, Grid3X3, Heart, ShoppingBag, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { insforge } from '../lib/insforge';
 
 const tabs = [
     { to: '/', icon: Home, label: 'Home' },
@@ -18,6 +19,7 @@ export default function StoreLayout() {
     const location = useLocation();
     const hideBottomNav = HIDE_NAV_PATHS.includes(location.pathname);
     const [cartCount, setCartCount] = useState(0);
+    const [storeInfo, setStoreInfo] = useState({ name: 'PHOOLVIAA', logo: null as string | null });
     const { user } = useAuth();
 
     const updateCartCount = () => {
@@ -29,6 +31,16 @@ export default function StoreLayout() {
         updateCartCount();
         window.addEventListener('cart-updated', updateCartCount);
         return () => window.removeEventListener('cart-updated', updateCartCount);
+    }, []);
+
+    useEffect(() => {
+        async function fetchStoreInfo() {
+            const { data } = await insforge.database.from('store_settings').select('store_name, logo_url').limit(1);
+            if (data && data[0]) {
+                setStoreInfo({ name: data[0].store_name || 'PHOOLVIAA', logo: data[0].logo_url });
+            }
+        }
+        fetchStoreInfo();
     }, []);
 
     const isTabActive = (to: string) => {
@@ -43,7 +55,13 @@ export default function StoreLayout() {
             <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
                 <div className="flex items-center justify-between px-4 py-3.5">
                     <div className="w-8" />
-                    <Link to="/" className="font-display text-xl tracking-[0.25em] text-charcoal">PHOOLVIAA</Link>
+                    <Link to="/" className="flex flex-col items-center">
+                        {storeInfo.logo ? (
+                            <img src={storeInfo.logo} alt={storeInfo.name} className="h-7 w-auto object-contain" />
+                        ) : (
+                            <span className="font-display text-xl tracking-[0.25em] text-charcoal uppercase">{storeInfo.name}</span>
+                        )}
+                    </Link>
                     <NavLink to="/cart" className="relative text-charcoal p-1">
                         <ShoppingBag size={22} />
                         {cartCount > 0 && (

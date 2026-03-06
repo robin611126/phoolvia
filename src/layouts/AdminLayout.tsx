@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { insforge } from '../lib/insforge';
 import {
     LayoutDashboard, Package, FolderOpen, ShoppingCart,
     Users, Home, Image, Tag, Settings, LogOut, Menu, X, ChevronRight
@@ -20,8 +21,19 @@ const navItems = [
 
 export default function AdminLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [storeInfo, setStoreInfo] = useState({ name: 'PHOOLVIAA', logo: null as string | null });
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchStoreInfo() {
+            const { data } = await insforge.database.from('store_settings').select('store_name, logo_url').limit(1);
+            if (data && data[0]) {
+                setStoreInfo({ name: data[0].store_name || 'PHOOLVIAA', logo: data[0].logo_url });
+            }
+        }
+        fetchStoreInfo();
+    }, []);
 
     const handleLogout = async () => {
         await logout();
@@ -41,9 +53,13 @@ export default function AdminLayout() {
             {/* Sidebar */}
             <aside className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-50 transform transition-transform duration-300 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex items-center justify-between p-5 border-b border-gray-100">
-                    <div>
-                        <h1 className="text-lg font-bold text-gray-900 tracking-wider">PHOOLVIAA</h1>
-                        <p className="text-xs text-gray-500 uppercase tracking-widest">Admin Portal</p>
+                    <div className="flex flex-col gap-1.5">
+                        {storeInfo.logo ? (
+                            <img src={storeInfo.logo} alt={storeInfo.name} className="h-8 w-auto object-contain" />
+                        ) : (
+                            <h1 className="text-lg font-bold text-gray-900 tracking-wider uppercase">{storeInfo.name}</h1>
+                        )}
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest font-semibold tracking-[0.2em] opacity-80 border-t border-gray-100 pt-1.5 inline-block">Admin Portal</p>
                     </div>
                     <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-500 hover:text-gray-700">
                         <X size={20} />
