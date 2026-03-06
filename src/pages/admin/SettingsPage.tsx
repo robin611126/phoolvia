@@ -69,7 +69,7 @@ export default function SettingsPage() {
     async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
         if (!file) return;
-        const { data } = await insforge.storage.from('media-library').upload('store/logo' + file.name.substring(file.name.lastIndexOf('.')), file);
+        const { data } = await insforge.storage.from('media-library').uploadAuto(file);
         if (data) setForm({ ...form, logo_url: data.url });
     }
 
