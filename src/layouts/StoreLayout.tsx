@@ -57,7 +57,7 @@ export default function StoreLayout() {
                     <div className="w-8" />
                     <Link to="/" className="flex flex-col items-center">
                         {storeInfo.logo ? (
-                            <img src={storeInfo.logo} alt={storeInfo.name} className="h-7 w-auto object-contain" />
+                            <img src={storeInfo.logo} alt={storeInfo.name} className="h-10 w-auto object-contain" />
                         ) : (
                             <span className="font-display text-xl tracking-[0.25em] text-charcoal uppercase">{storeInfo.name}</span>
                         )}
