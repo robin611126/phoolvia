@@ -40,7 +40,7 @@ const INDIAN_STATES = [
 
 function FormField({
     label, id, value, type = 'text', onChange, onBlur,
-    error, touched, maxLength, inputMode, autoCapitalize, placeholder, required = true,
+    error, touched, maxLength, inputMode, autoCapitalize, required = true,
     children
 }: {
     label: string; id: string; value: string; type?: string;
@@ -48,7 +48,7 @@ function FormField({
     onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
     error: string; touched: boolean; maxLength?: number;
     inputMode?: 'text' | 'numeric' | 'tel' | 'email';
-    autoCapitalize?: string; placeholder?: string; required?: boolean;
+    autoCapitalize?: string; required?: boolean;
     children?: React.ReactNode;
 }) {
     const isValid = touched && !error && value.trim().length > 0;
