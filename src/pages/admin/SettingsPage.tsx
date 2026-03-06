@@ -69,8 +69,24 @@ export default function SettingsPage() {
     async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
         if (!file) return;
+        setSaving(true);
         const { data } = await insforge.storage.from('media-library').uploadAuto(file);
-        if (data) setForm({ ...form, logo_url: data.url });
+        if (data) {
+            setForm({ ...form, logo_url: data.url });
+            if (settingsId) {
+                await insforge.database.from('store_settings').update({ logo_url: data.url }).eq('id', settingsId);
+            }
+        }
+        setSaving(false);
+    }
+
+    async function handleLogoRemove() {
+        setSaving(true);
+        setForm({ ...form, logo_url: '' });
+        if (settingsId) {
+            await insforge.database.from('store_settings').update({ logo_url: null }).eq('id', settingsId);
+        }
+        setSaving(false);
     }
 
     if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-admin-primary" /></div>;
@@ -103,7 +119,7 @@ export default function SettingsPage() {
                                 {form.logo_url && (
                                     <button
                                         type="button"
-                                        onClick={() => setForm({ ...form, logo_url: '' })}
+                                        onClick={handleLogoRemove}
                                         className="text-sm text-red-500 hover:underline text-left cursor-pointer"
                                     >
                                         Remove Logo
