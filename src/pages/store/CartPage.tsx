@@ -7,6 +7,7 @@ interface CartItem { id: string; name: string; slug: string; price: number; imag
 export default function CartPage() {
     const [items, setItems] = useState<CartItem[]>([]);
     const [note, setNote] = useState('');
+    const [isCheckingOut, setIsCheckingOut] = useState(false);
 
     useEffect(() => { loadCart(); window.addEventListener('cart-updated', loadCart); return () => window.removeEventListener('cart-updated', loadCart); }, []);
 
@@ -32,6 +33,45 @@ export default function CartPage() {
             </div>
         );
     }
+
+    const handleCheckout = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        setIsCheckingOut(true);
+        try {
+            const res = await fetch(`${import.meta.env.VITE_INSFORGE_BASE_URL}/functions/v1/shiprocket-checkout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cart_data: {
+                        items: items.map(item => ({
+                            variant_id: item.id.toString(),
+                            quantity: item.quantity
+                        }))
+                    },
+                    redirect_url: window.location.origin + '/profile'
+                })
+            });
+            const data = await res.json();
+            if (res.ok && data.success && data.token) {
+                // Trigger shiprocket headless checkout UI
+                (window as any).HeadlessCheckout.addToCart(
+                    e.nativeEvent,
+                    data.token,
+                    { fallbackUrl: window.location.origin + '/checkout' }
+                );
+            } else {
+                console.error('Shiprocket token error:', data);
+                alert('Checkout initialization failed.');
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
+            alert('An error occurred during checkout setup.');
+        } finally {
+            setIsCheckingOut(false);
+        }
+    };
 
     return (
         <div className="animate-fade-in px-4 py-4 space-y-4">
@@ -95,9 +135,14 @@ export default function CartPage() {
             </div>
 
             {/* Checkout */}
-            <Link to="/checkout" className="block w-full btn-primary text-center flex items-center justify-center gap-2">
-                Proceed to Checkout <ArrowRight size={18} />
-            </Link>
+            <button
+                id="buyNow"
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+                className={`w-full btn-primary text-center flex items-center justify-center gap-2 ${isCheckingOut ? 'opacity-75 cursor-not-allowed' : ''}`}
+            >
+                {isCheckingOut ? 'Securing Checkout...' : 'Proceed to Checkout'} <ArrowRight size={18} />
+            </button>
         </div>
     );
 }
