@@ -193,7 +193,10 @@ export default function CheckoutPage() {
                 name: 'PHOOLVIAA', description: `Order ${orderNumber}`,
                 order_id: data.orderId,
                 handler: async (response: any) => {
-                    await saveOrder({ ...orderData, razorpay_payment_id: response.razorpay_payment_id, razorpay_order_id: response.razorpay_order_id }, 'paid');
+                    await saveOrder({
+                        ...orderData,
+                        admin_notes: `Razorpay Payment ID: ${response.razorpay_payment_id} | Razorpay Order ID: ${response.razorpay_order_id}`
+                    }, 'paid');
                 },
                 prefill: { name: form.name, email: form.email, contact: form.phone },
                 theme: { color: '#1A1A2E' },
@@ -237,6 +240,7 @@ export default function CheckoutPage() {
             }
             navigate('/order-success', { state: { orderNumber: orderData.order_number, total, name: form.name } });
         } else {
+            console.error('Failed to create order. error:', error);
             toast.error('Failed to place order. Please try again.');
         }
         setLoading(false);
