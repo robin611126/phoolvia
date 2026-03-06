@@ -4,7 +4,7 @@
  * Docs: https://apidocs.shiprocket.in/
  */
 
-const SHIPROCKET_API = 'https://apiv2.shiprocket.in/v1/external';
+import { insforge } from './insforge';
 
 let cachedToken: string | null = null;
 let tokenExpiry: number = 0;
@@ -13,17 +13,20 @@ let tokenExpiry: number = 0;
 export async function getShiprocketToken(): Promise<string> {
     if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
 
-    const res = await fetch(`${SHIPROCKET_API}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            email: import.meta.env.VITE_SHIPROCKET_EMAIL,
-            password: import.meta.env.VITE_SHIPROCKET_PASSWORD,
-        }),
+    const { data, error } = await insforge.functions.invoke('shiprocket-api', {
+        body: {
+            endpoint: '/auth/login',
+            method: 'POST',
+            body: {
+                email: import.meta.env.VITE_SHIPROCKET_EMAIL,
+                password: import.meta.env.VITE_SHIPROCKET_PASSWORD,
+            }
+        }
     });
 
-    const data = await res.json();
-    if (!res.ok || !data.token) throw new Error(data.message || 'Shiprocket auth failed');
+    if (error || !data || !data.token) {
+        throw new Error(error?.message || data?.message || 'Shiprocket auth failed');
+    }
 
     cachedToken = data.token;
     tokenExpiry = Date.now() + 9 * 24 * 60 * 60 * 1000; // 9 days
@@ -33,15 +36,23 @@ export async function getShiprocketToken(): Promise<string> {
 /** Authenticated fetch wrapper */
 async function shiprocketFetch(endpoint: string, options: RequestInit = {}) {
     const token = await getShiprocketToken();
-    const res = await fetch(`${SHIPROCKET_API}${endpoint}`, {
-        ...options,
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-            ...(options.headers || {}),
-        },
+
+    let parsedBody = undefined;
+    if (options.body) {
+        try { parsedBody = typeof options.body === 'string' ? JSON.parse(options.body) : options.body; } catch { }
+    }
+
+    const { data, error } = await insforge.functions.invoke('shiprocket-api', {
+        body: {
+            endpoint,
+            method: options.method || 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+            body: parsedBody
+        }
     });
-    return res.json();
+
+    if (error) throw new Error(error.message);
+    return data;
 }
 
 /** Create a Shiprocket order from our order data */
@@ -54,6 +65,7 @@ export async function createShiprocketOrder(order: {
     shipping_address: { street: string; city: string; state: string; pin: string };
     items: { name: string; sku?: string; quantity: number; price: number }[];
     subtotal: number;
+    shipping_fee?: number;
     total: number;
     payment_method: string;
 }) {
@@ -79,6 +91,7 @@ export async function createShiprocketOrder(order: {
         })),
         payment_method: order.payment_method === 'cod' ? 'COD' : 'Prepaid',
         sub_total: order.subtotal,
+        shipping_charges: order.shipping_fee || 0,
         length: 20,
         breadth: 15,
         height: 10,

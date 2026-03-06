@@ -61,6 +61,7 @@ export default function OrderDetailPage() {
                 shipping_address: order.shipping_address || {},
                 items: (order.items || []).map((i: any) => ({ name: i.name, sku: i.sku || 'SKU-001', quantity: i.quantity, price: i.price })),
                 subtotal: order.subtotal || order.total,
+                shipping_fee: order.shipping_fee || 0,
                 total: order.total,
                 payment_method: order.payment_method,
             });
@@ -311,12 +312,17 @@ export default function OrderDetailPage() {
                         <p className="text-sm text-gray-500">{order.customer_phone}</p>
                     </div>
                 </div>
-                {addr.street && (
+                {addr.full ? (
+                    <div className="flex items-start gap-3 pt-2 border-t border-gray-50">
+                        <MapPin size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
+                        <p className="text-sm text-gray-600">{addr.full}</p>
+                    </div>
+                ) : addr.street ? (
                     <div className="flex items-start gap-3 pt-2 border-t border-gray-50">
                         <MapPin size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
                         <p className="text-sm text-gray-600">{addr.street}{addr.city ? `, ${addr.city}` : ''}{addr.pin ? ` - ${addr.pin}` : ''}</p>
                     </div>
-                )}
+                ) : null}
             </div>
 
             {/* Order Items */}
