@@ -45,6 +45,8 @@ module.exports = async function (req) {
         }
         const hmacBase64 = btoa(binaryString);
 
+        console.log("Sending checkout request to Shiprocket:", shiprocketBodyStr);
+
         // Make the API call to Shiprocket
         const res = await fetch('https://checkout-api.shiprocket.com/api/v1/access-token/checkout', {
             method: 'POST',
@@ -57,6 +59,8 @@ module.exports = async function (req) {
         });
 
         const data = await res.json();
+        console.log("Shiprocket response status:", res.status);
+        console.log("Shiprocket response data:", JSON.stringify(data));
 
         if (!res.ok) {
             throw new Error(`Shiprocket API error: ${JSON.stringify(data)}`);
