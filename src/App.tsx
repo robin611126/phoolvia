@@ -40,6 +40,9 @@ import CheckoutPage from './pages/store/CheckoutPage';
 import OrderSuccessPage from './pages/store/OrderSuccessPage';
 import AboutPage from './pages/store/AboutPage';
 import ContactPage from './pages/store/ContactPage';
+import StoreLoginPage from './pages/store/LoginPage';
+import RegisterPage from './pages/store/RegisterPage';
+import ProfilePage from './pages/store/ProfilePage';
 
 // Legal Pages
 import TermsPage from './pages/store/legal/TermsPage';
@@ -109,8 +112,10 @@ export default function App() {
             <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
             <Route path="/refund-policy" element={<RefundPolicyPage />} />
 
+            <Route path="/login" element={<StoreLoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/wishlist" element={<div className="flex flex-col items-center justify-center py-20 text-center px-4"><span className="text-4xl mb-3">❤️</span><h2 className="font-display text-xl font-semibold text-charcoal mb-2">Wishlist</h2><p className="text-sm text-gray-500">Coming soon!</p></div>} />
-            <Route path="/profile" element={<div className="flex flex-col items-center justify-center py-20 text-center px-4"><span className="text-4xl mb-3">👤</span><h2 className="font-display text-xl font-semibold text-charcoal mb-2">Profile</h2><p className="text-sm text-gray-500">Coming soon!</p></div>} />
           </Route>
 
           {/* Catch-all */}

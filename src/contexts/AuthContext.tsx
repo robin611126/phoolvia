@@ -15,6 +15,7 @@ interface AuthContextType {
     isLoading: boolean;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<{ error?: string }>;
+    register: (email: string, password: string, name: string) => Promise<{ error?: string, requireEmailVerification?: boolean }>;
     logout: () => Promise<void>;
 }
 
@@ -52,13 +53,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return {};
     }
 
+    async function register(email: string, password: string, name: string) {
+        const { data, error } = await insforge.auth.signUp({ email, password, name });
+        if (error) {
+            return { error: error.message || 'Error creating account' };
+        }
+        // If email verification is NOT required and we get an access token, we are logged in
+        if (!data?.requireEmailVerification && data?.user) {
+            setUser(data.user as User);
+        }
+        return { requireEmailVerification: data?.requireEmailVerification };
+    }
+
     async function logout() {
         await insforge.auth.signOut();
         setUser(null);
     }
 
     return (
-        <AuthContext.Provider value={{ user, isLoading, isAuthenticated: !!user, login, logout }}>
+        <AuthContext.Provider value={{ user, isLoading, isAuthenticated: !!user, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );

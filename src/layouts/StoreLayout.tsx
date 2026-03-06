@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link, NavLink } from 'react-router-dom';
 import { Home, Grid3X3, Heart, ShoppingBag, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const tabs = [
     { to: '/', icon: Home, label: 'Home' },
     { to: '/shop', icon: Grid3X3, label: 'Shop' },
     { to: '/wishlist', icon: Heart, label: 'Wishlist' },
     { to: '/cart', icon: ShoppingBag, label: 'Cart' },
-    { to: '/profile', icon: User, label: 'Profile' },
+    // Profile is handled dynamically during render
+    { to: '/profile', icon: User, label: 'Profile' }
 ];
 
 export default function StoreLayout() {
     const location = useLocation();
     const hideBottomNav = ['/checkout', '/order-success'].includes(location.pathname);
     const [cartCount, setCartCount] = useState(0);
+    const { user } = useAuth();
 
     const updateCartCount = () => {
         const cart = JSON.parse(localStorage.getItem('phoolviaa_cart') || '[]');
@@ -82,11 +85,16 @@ export default function StoreLayout() {
                 <nav className="fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-100 safe-area-bottom">
                     <div className="flex items-center justify-around py-2">
                         {tabs.map((tab) => {
-                            const isActive = tab.to === '/' ? location.pathname === '/' : location.pathname.startsWith(tab.to);
+                            let targetTo = tab.to;
+                            if (tab.to === '/profile' && !user) {
+                                targetTo = '/login';
+                            }
+
+                            const isActive = targetTo === '/' ? location.pathname === '/' : location.pathname.startsWith(targetTo);
                             return (
                                 <NavLink
                                     key={tab.to}
-                                    to={tab.to}
+                                    to={targetTo}
                                     className={`flex flex-col items-center gap-0.5 px-3 py-1 ${isActive ? 'text-charcoal' : 'text-gray-400'
                                         }`}
                                 >
