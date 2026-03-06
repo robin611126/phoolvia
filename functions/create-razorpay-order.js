@@ -35,10 +35,11 @@ export default async function (req) {
             });
         }
 
-        // Initialize Insforge client to fetch true product prices
-        const supabaseUrl = Deno.env.get('SUPABASE_URL') || Deno.env.get('INSFORGE_URL');
-        const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY') || Deno.env.get('INSFORGE_ANON_KEY');
-        const insforge = createClient({ baseUrl: supabaseUrl, anonKey: supabaseAnonKey });
+        // Initialize Insforge client with hardcoded credentials
+        // (VITE_ env vars are only for Vite apps and don't work in Deno Edge Functions)
+        const INSFORGE_URL = 'https://62psi7hb.ap-southeast.insforge.app';
+        const INSFORGE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OC0xMjM0LTU2NzgtOTBhYi1jZGVmMTIzNDU2NzgiLCJlbWFpbCI6ImFub25AaW5zZm9yZ2UuY29tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjAwMzJ9.SMHv1lGTHXkQ-ShSQwTYvS5jsbDyyBVWC70Sq-aDCQ4';
+        const insforge = createClient({ baseUrl: INSFORGE_URL, anonKey: INSFORGE_ANON_KEY });
 
         // Calculate secure total
         let calculatedSubtotal = 0;
