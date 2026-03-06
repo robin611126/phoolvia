@@ -58,12 +58,15 @@ export default function SettingsPage() {
             online_payment_enabled: form.online_payment_enabled, updated_at: new Date().toISOString(),
         };
         if (settingsId) {
-            await insforge.database.from('store_settings').update(payload).eq('id', settingsId);
+            const { error } = await insforge.database.from('store_settings').update(payload).eq('id', settingsId);
+            if (error) { console.error("Update Error:", error); alert(`Error saving settings: ${error.message}`); }
+            else alert('Settings saved!');
         } else {
-            await insforge.database.from('store_settings').insert(payload);
+            const { error } = await insforge.database.from('store_settings').insert(payload);
+            if (error) { console.error("Insert Error:", error); alert(`Error creating settings: ${error.message}`); }
+            else alert('Settings saved!');
         }
         setSaving(false);
-        alert('Settings saved!');
     }
 
     async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {

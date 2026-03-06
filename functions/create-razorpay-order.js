@@ -64,8 +64,27 @@ export default async function (req) {
             calculatedSubtotal += (parseFloat(product.price) * Math.floor(item.quantity));
         }
 
-        // Free shipping if subtotal >= 500, else 50 Rs
-        const shippingFee = calculatedSubtotal >= 500 ? 0 : 50;
+        // Fetch shipping settings from database securely
+        let threshold = 500;
+        let rate = 50;
+
+        try {
+            const { data: storeSettings, error: settingsError } = await insforge.database
+                .from('store_settings')
+                .select('flat_shipping_rate, free_shipping_threshold')
+                .limit(1)
+                .maybeSingle();
+
+            if (!settingsError && storeSettings) {
+                threshold = storeSettings.free_shipping_threshold != null ? parseFloat(storeSettings.free_shipping_threshold) : 500;
+                rate = storeSettings.flat_shipping_rate != null ? parseFloat(storeSettings.flat_shipping_rate) : 50;
+            }
+        } catch (err) {
+            console.error('Failed to fetch store settings, using defaults', err);
+        }
+
+        const isEligibleForFreeShipping = calculatedSubtotal >= threshold;
+        const shippingFee = isEligibleForFreeShipping ? 0 : rate;
         const totalAmount = calculatedSubtotal + shippingFee;
 
         // Razorpay API expects amount in paise (multiply by 100)

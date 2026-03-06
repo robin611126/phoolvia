@@ -155,13 +155,13 @@ export default function CheckoutPage() {
         fetchSettings();
     }, []);
 
-    // Use fetched settings or fallback to defaults
+    // Use fetched settings or fallback to defaults (only calculate if loaded)
     const threshold = storeSettings?.free_shipping_threshold != null ? parseFloat(storeSettings.free_shipping_threshold) : 500;
     const rate = storeSettings?.flat_shipping_rate != null ? parseFloat(storeSettings.flat_shipping_rate) : 50;
 
     // Check if subtotal is eligible for free shipping
     const isEligibleForFreeShipping = subtotal >= threshold;
-    const shippingFee = isEligibleForFreeShipping ? 0 : rate;
+    const shippingFee = (storeSettings === null) ? 0 : (isEligibleForFreeShipping ? 0 : rate); // Wait for settings to calculate fee
     const total = subtotal + shippingFee;
 
     const loadRazorpayScript = () => new Promise((resolve) => {
