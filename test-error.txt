@@ -1,0 +1,5 @@
+{
+  "name": "InsForgeError",
+  "statusCode": 500,
+  "error": "Shiprocket API error (API Key Length: 16, Secret Key Length: 32): {\"timestamp\":\"06-03-2026 04:07:01 PM\",\"ok\":false,\"latency\":null,\"result\":null,\"error\":{\"message\":\"Something went wrong! Please try again later.\"}}"
+}

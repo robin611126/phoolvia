@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck } from 'lucide-react';
-import { insforge } from '../../lib/insforge';
 
 interface CartItem { id: string; name: string; slug: string; price: number; image: string | null; color: string; size: string; quantity: number; variant: string; }
 
 export default function CartPage() {
+    const navigate = useNavigate();
     const [items, setItems] = useState<CartItem[]>([]);
     const [note, setNote] = useState('');
-    const [isCheckingOut, setIsCheckingOut] = useState(false);
 
     useEffect(() => { loadCart(); window.addEventListener('cart-updated', loadCart); return () => window.removeEventListener('cart-updated', loadCart); }, []);
 
@@ -35,39 +34,9 @@ export default function CartPage() {
         );
     }
 
-    const handleCheckout = async (e: React.MouseEvent) => {
+    const handleCheckout = (e: React.MouseEvent) => {
         e.preventDefault();
-        setIsCheckingOut(true);
-        try {
-            const { data, error } = await insforge.functions.invoke('shiprocket-checkout', {
-                body: {
-                    cart_data: {
-                        items: items.map(item => ({
-                            variant_id: item.id.toString(),
-                            quantity: item.quantity
-                        }))
-                    },
-                    redirect_url: window.location.origin + '/profile'
-                }
-            });
-
-            if (!error && data && data.success && data.token) {
-                // Trigger shiprocket headless checkout UI
-                (window as any).HeadlessCheckout.addToCart(
-                    e.nativeEvent,
-                    data.token,
-                    { fallbackUrl: window.location.origin + '/checkout' }
-                );
-            } else {
-                console.error('Shiprocket token error:', error || data);
-                alert('Checkout initialization failed.');
-            }
-        } catch (error) {
-            console.error('Checkout error:', error);
-            alert('An error occurred during checkout setup.');
-        } finally {
-            setIsCheckingOut(false);
-        }
+        navigate('/checkout');
     };
 
     return (
@@ -135,10 +104,9 @@ export default function CartPage() {
             <button
                 id="buyNow"
                 onClick={handleCheckout}
-                disabled={isCheckingOut}
-                className={`w-full btn-primary text-center flex items-center justify-center gap-2 ${isCheckingOut ? 'opacity-75 cursor-not-allowed' : ''}`}
+                className="w-full btn-primary text-center flex items-center justify-center gap-2"
             >
-                {isCheckingOut ? 'Securing Checkout...' : 'Proceed to Checkout'} <ArrowRight size={18} />
+                Proceed to Checkout <ArrowRight size={18} />
             </button>
         </div>
     );

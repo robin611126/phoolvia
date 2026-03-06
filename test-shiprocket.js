@@ -17,7 +17,9 @@ async function run() {
     });
 
     if (error) {
-        console.error("Function Error:", error);
+        const fs = await import('fs');
+        fs.writeFileSync('test-error.txt', JSON.stringify(error, null, 2));
+        console.log("Error written to test-error.txt");
     } else {
         console.log("Function Data:", data);
     }

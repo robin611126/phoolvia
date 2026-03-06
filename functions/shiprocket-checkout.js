@@ -21,8 +21,18 @@ module.exports = async function (req) {
 
         const shiprocketBodyStr = JSON.stringify(requestBody);
 
-        const apiKey = Deno.env.get('SHIPROCKET_API_KEY') || 'TEST_KEY';
-        const secretKey = Deno.env.get('SHIPROCKET_SECRET_KEY') || 'TEST_SECRET';
+        const apiKey = Deno.env.get('SHIPROCKET_API_KEY');
+        const secretKey = Deno.env.get('SHIPROCKET_SECRET_KEY');
+
+        console.log("Environment keys loaded:", {
+            hasApiKey: !!apiKey,
+            hasSecretKey: !!secretKey,
+            apiKeyLength: apiKey ? apiKey.length : 0
+        });
+
+        if (!apiKey || !secretKey) {
+            throw new Error("Missing Shiprocket API credentials in Edge Function environment variables. Please ensure SHIPROCKET_API_KEY and SHIPROCKET_SECRET_KEY are set in the Insforge dashboard.");
+        }
 
         // Calculate HMAC SHA256 using Web Crypto API
         const encoder = new TextEncoder();
@@ -63,7 +73,7 @@ module.exports = async function (req) {
         console.log("Shiprocket response data:", JSON.stringify(data));
 
         if (!res.ok) {
-            throw new Error(`Shiprocket API error: ${JSON.stringify(data)}`);
+            throw new Error(`Shiprocket API error (API Key Length: ${apiKey ? apiKey.length : 0}, Secret Key Length: ${secretKey ? secretKey.length : 0}): ${JSON.stringify(data)}`);
         }
 
         return new Response(JSON.stringify({ success: true, token: data.token, raw: data }), {
