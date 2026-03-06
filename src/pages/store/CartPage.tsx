@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, Truck } from 'lucide-react';
+import { insforge } from '../../lib/insforge';
 
 interface CartItem { id: string; name: string; slug: string; price: number; image: string | null; color: string; size: string; quantity: number; variant: string; }
 
@@ -38,12 +39,8 @@ export default function CartPage() {
         e.preventDefault();
         setIsCheckingOut(true);
         try {
-            const res = await fetch(`${import.meta.env.VITE_INSFORGE_BASE_URL}/functions/v1/shiprocket-checkout`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            const { data, error } = await insforge.functions.invoke('shiprocket-checkout', {
+                body: {
                     cart_data: {
                         items: items.map(item => ({
                             variant_id: item.id.toString(),
@@ -51,10 +48,10 @@ export default function CartPage() {
                         }))
                     },
                     redirect_url: window.location.origin + '/profile'
-                })
+                }
             });
-            const data = await res.json();
-            if (res.ok && data.success && data.token) {
+
+            if (!error && data && data.success && data.token) {
                 // Trigger shiprocket headless checkout UI
                 (window as any).HeadlessCheckout.addToCart(
                     e.nativeEvent,
@@ -62,7 +59,7 @@ export default function CartPage() {
                     { fallbackUrl: window.location.origin + '/checkout' }
                 );
             } else {
-                console.error('Shiprocket token error:', data);
+                console.error('Shiprocket token error:', error || data);
                 alert('Checkout initialization failed.');
             }
         } catch (error) {
